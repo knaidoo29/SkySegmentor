@@ -1,5 +1,160 @@
 import numpy as np
-import magpie
+
+from . import coords, maths
+
+
+def _rotmat_x(angle):
+    """Rotation matrix for rotation around the x-axis.
+
+    Parameters
+    ----------
+    angle : float
+        Angle of rotation.
+
+    Returns
+    -------
+    rotx : array
+        Rotation matrix.
+    """
+    rotx = np.array([1., 0., 0., 0., np.cos(angle), -np.sin(angle), 0., np.sin(angle), np.cos(angle)])
+    return rotx
+
+
+def _rotmat_y(angle):
+    """Rotation matrix for rotation around the y-axis.
+
+    Parameters
+    ----------
+    angle : float
+        Angle of rotation.
+
+    Returns
+    -------
+    roty : array
+        Rotation matrix.
+    """
+    roty = np.array([np.cos(angle), 0., np.sin(angle), 0., 1., 0., -np.sin(angle), 0., np.cos(angle)])
+    return roty
+
+
+def _rotmat_z(angle):
+    """Rotation matrix for rotation around the z-axis.
+
+    Parameters
+    ----------
+    angle : float
+        Angle of rotation.
+
+    Returns
+    -------
+    rotz : array
+        Rotation matrix.
+    """
+    rotz = np.array([np.cos(angle), -np.sin(angle), 0., np.sin(angle), np.cos(angle), 0., 0., 0., 1.])
+    return rotz
+
+
+def _rotmat_axis(angle, axis):
+    """Rotation matrix for any given axis.
+
+    Parameters
+    ----------
+    angle : float
+        Angle of rotation.
+    axis : int
+        Axis of rotation, 0 = x-axis, 1 = y-axis and 2 = z-axis.
+    """
+    if axis == 0:
+        return _rotmat_x(angle)
+    elif axis == 1:
+        return _rotmat_y(angle)
+    elif axis == 2:
+        return _rotmat_z(angle)
+
+
+def _rotmat_euler(angles, axes):
+    """Euler rotational matrix.
+
+    Parameters
+    ----------
+    angles : float
+        Angles of rotation.
+    axes : int
+        Axes of rotation.
+
+    Returns
+    -------
+    _rot : array
+        Euler rotational matrix.
+    """
+    _rot2 = _rotmat_axis(angles[2], axes[2])
+    _rot1 = _rotmat_axis(angles[1], axes[1])
+    _rot0 = _rotmat_axis(angles[0], axes[0])
+    _rot21 = maths.matrix_dot_3by3(_rot2, _rot1)
+    _rot = maths.matrix_dot_3by3(_rot21, _rot0)
+    return _rot
+
+
+def _rotate_3d(x, y, z, rot):
+    """Rotates cartesian coordinates given an input rotational matrix.
+
+    Parameters
+    ----------
+    x, y, z : array
+        3D cartesian coordinates to rotate.
+    rot : array
+        Rotational matrix.
+
+    Returns
+    -------
+    xrot, yrot, zrot : array
+        Rotated 3D cartesian coordinates.
+    """
+    xrot = rot[0]*x + rot[1]*y + rot[2]*z
+    yrot = rot[3]*x + rot[4]*y + rot[5]*z
+    zrot = rot[6]*x + rot[7]*y + rot[8]*z
+    return xrot, yrot, zrot
+
+
+def rotate3d_Euler(x, y, z, angles, axes='zyz', center=[0., 0., 0.]):
+    """Rotates points in 3D cartesian coordinates by Euler angle around
+    specified axes.
+
+    Parameters
+    ----------
+    x, y, z : float or array
+        Cartesian coordinates.
+    angles : array
+        Euler angles.
+    axes : str, optional
+        Euler angle axes, default z-y-z rotations.
+    center : list[float], optional
+        Center of rotation, default=[0., 0., 0.].
+    k : array, optional
+        If k is specified, points are rotated around a unit vector k.
+
+    Returns
+    -------
+    xrot, yrot, zrot : float or array
+        Rotated x, y and z coordinates.
+    """
+    assert len(angles) == len(axes), "Length of angles and axes must be consistent."
+    assert len(angles) == 3, "Length of angles and axes must be == 3."
+    axes_int = []
+    for i in range(0, len(axes)):
+        if axes[i] == 'x':
+            axes_int.append(0)
+        elif axes[i] == 'y':
+            axes_int.append(1)
+        elif axes[i] == 'z':
+            axes_int.append(2)
+    _x, _y, _z = x-center[0], y-center[1], z-center[2]
+    rot = _rotmat_euler(angles, axes_int)
+    _x, _y, _z = _rotate_3d(_x, _y, _z, rot)
+    xrot = _x + center[0]
+    yrot = _y + center[1]
+    zrot = _z + center[2]
+    return xrot, yrot, zrot
 
 
 def rotate_usphere(phi, the, angles):
@@ -17,9 +172,9 @@ def rotate_usphere(phi, the, angles):
         r = 1.
     else:
         r = np.ones(len(phi))
-    x, y, z = magpie.coords.sphere2cart(r, phi, the)
-    x, y, z = magpie.coords.rotate3d_Euler(x, y, z, angles, axes='zyz', center=[0., 0., 0.])
-    _, phi, the = magpie.coords.cart2sphere(x, y, z)
+    x, y, z = coords.sphere2cart(r, phi, the)
+    x, y, z = rotate3d_Euler(x, y, z, angles, axes='zyz', center=[0., 0., 0.])
+    _, phi, the = coords.cart2sphere(x, y, z)
     return phi, the
 
 
@@ -39,12 +194,12 @@ def midpoint_usphere(phi1, phi2, the1, the2):
     midphi, midthe : float
         Midpoint along the longitude phi and latitude theta.
     """
-    x1, y1, z1 = magpie.coords.sphere2cart(1., phi1, the1)
-    x2, y2, z2 = magpie.coords.sphere2cart(1., phi2, the2)
+    x1, y1, z1 = coords.sphere2cart(1., phi1, the1)
+    x2, y2, z2 = coords.sphere2cart(1., phi2, the2)
     xm = 0.5*(x1+x2)
     ym = 0.5*(y1+y2)
     zm = 0.5*(z1+z2)
-    _, midphi, midthe = magpie.coords.cart2sphere(xm, ym, zm)
+    _, midphi, midthe = coords.cart2sphere(xm, ym, zm)
     return midphi, midthe
 
 

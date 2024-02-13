@@ -1,4 +1,13 @@
 
+from .coords import cart2sphere
+from .coords import sphere2cart
+from .coords import distusphere
+
+from .maths import vector_norm
+from .maths import vector_dot
+from .maths import vector_cross
+from .maths import matrix_dot_3by3
+
 from .rotate import rotate_usphere
 from .rotate import midpoint_usphere
 from .rotate import rotate2plane
@@ -15,3 +24,5 @@ from .partition import weight_dif
 from .partition import find_dphi
 from .partition import split_into_2
 from .partition import split_into_N
+
+from .utils import isscalar

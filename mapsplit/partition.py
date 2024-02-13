@@ -1,8 +1,7 @@
 import numpy as np
 import healpy as hp
-import magpie
 
-from . import rotate
+from . import coords, rotate
 
 
 def get_partition_IDs(partition):
@@ -41,7 +40,9 @@ def total_partition_weights(partition, weights):
     """
     partition_IDs = get_partition_IDs(partition)
     Npartitions = np.max(partition_IDs)+1
-    partitions_weights = magpie.pixels.bin_pix(partition, Npartition, weights=weights)
+    #partitions_weights = magpie.pixels.bin_pix(partition, Npartition, weights=weights)
+    partitions_weights = np.zeros(Npartition)
+    np.add.at(partition_weights, partition_IDs, weights)
     return partition_IDs, partition_weights
 
 
@@ -122,7 +123,7 @@ def get_most_dist_points(nside, bnmap):
     tt1, tt2 = np.meshgrid(the_bound, the_bound, indexing='ij')
     pp1, pp2, tt1, tt2 = pp1.flatten(), pp2.flatten(), tt1.flatten(), tt2.flatten()
 
-    dist = magpie.coords.distusphere(pp1, tt1, pp2, tt2)
+    dist = coords.distusphere(pp1, tt1, pp2, tt2)
 
     ind = np.argmax(dist)
     p1, p2 = pp1[ind], pp2[ind]
