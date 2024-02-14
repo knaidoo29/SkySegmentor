@@ -99,7 +99,7 @@ def find_boundary_pix(nside, bnmap):
     return pixboundID
 
 
-def get_most_dist_points(nside, bnmap):
+def get_most_dist_points(nside, bnmap, smooth=False):
     """Returns the most distant points on a binary map. Note there is an implicit
     assumption that the map does not span regions larger than a hemisphere.
 
@@ -109,6 +109,9 @@ def get_most_dist_points(nside, bnmap):
         HEalpix map nside.
     bnmap : int array
         Binary healpix map.
+    smooth : bool, optional
+        Smooth binary map before looking for longest side. Recommended if the
+        map has many holes.
 
     Returns
     -------
@@ -116,7 +119,15 @@ def get_most_dist_points(nside, bnmap):
         Angular coordinates (phi, theta) for the most distant points (1 and 2) on
         the binary map.
     """
-    pixboundID = find_boundary_pix(nside, bnmap)
+    if smooth:
+        bnmapsm = hp.smoothing(bnmap, fwhm=0.0, sigma=np.sqrt(hp.nside2pixarea(int(nside/4))))
+        _bnmap = np.zeros(len(bnmap))
+        cond = np.where(bnmapsm > 0.05)[0]
+        _bnmap[cond] = 1.
+    else:
+        _bnmap = bnmap
+
+    pixboundID = find_boundary_pix(nside, _bnmap)
     the_bound, phi_bound = hp.pix2ang(nside, pixboundID)
 
     pp1, pp2 = np.meshgrid(phi_bound, phi_bound, indexing='ij')
@@ -183,7 +194,7 @@ def find_dphi(phi, weights, balance=1):
     return dphi
 
 
-def split_into_2(weightmap, balance=1, partitionmap=None, partition=None):
+def split_into_2(weightmap, balance=1, partitionmap=None, partition=None, smooth=False):
     """Splits a map with weights into 2 equal (unequal in balance != 1).
 
     Parameters
@@ -196,6 +207,9 @@ def split_into_2(weightmap, balance=1, partitionmap=None, partition=None):
         Partitioned map IDs.
     partition : int, optional
         A singular partition to be partitioned in two pieces.
+    smooth : bool, optional
+        Smooth binary map before looking for longest side. Recommended if the
+        map has many holes.
 
     Returns
     -------
@@ -222,7 +236,7 @@ def split_into_2(weightmap, balance=1, partitionmap=None, partition=None):
     _the, _phi = hp.pix2ang(nside, _pixID)
     _weights = weightmap[_pixID]
 
-    p1, t1, p2, t2 = get_most_dist_points(nside, _bnmap)
+    p1, t1, p2, t2 = get_most_dist_points(nside, _bnmap, smooth=smooth)
     a1, a2, a3 = rotate.rotate2plane([p1, t1], [p2, t2])
 
     _phi, _the = rotate.forward_rotate(_phi, _the, a1, a2, a3)
@@ -235,7 +249,7 @@ def split_into_2(weightmap, balance=1, partitionmap=None, partition=None):
     return partitionmap
 
 
-def split_into_N(weightmap, Npartitions):
+def split_into_N(weightmap, Npartitions, smooth=False):
     """Splits a map with weights into equal Npartition sides.
 
     Parameters
@@ -244,6 +258,9 @@ def split_into_N(weightmap, Npartitions):
         Healpix weight map.
     Npartitions : int
         Number of partitioned regions
+    smooth : bool, optional
+        Smooth binary map before looking for longest side. Recommended if the
+        map has many holes.
 
     Returns
     -------
@@ -272,6 +289,6 @@ def split_into_N(weightmap, Npartitions):
                 balance = wei2/wei1
 
                 partitionmap = split_into_2(weightmap, balance, partitionmap=partitionmap,
-                    partition=partition)
+                    partition=partition, smooth=smooth)
 
     return partitionmap
