@@ -9,7 +9,6 @@ with open(path.join(this_directory, 'README.md')) as f:
     long_description = f.read()
 
 exts = []
-#exts.append(Extension(name='fiesta.src.grid', sources=['fiesta/src/grid.f90']))
 
 setup(name = 'MapSplit',
       version = '0.0.0',
@@ -21,7 +20,7 @@ setup(name = 'MapSplit',
       author_email      = "krishna.naidoo.11@ucl.ac.uk",
       license='MIT',
       packages=setuptools.find_packages(),
-      install_requires=['numpy', 'scipy'],
+      install_requires=['numpy', 'healpy'],
       ext_modules = exts,
       python_requires = '>=3',
       classifiers=[
