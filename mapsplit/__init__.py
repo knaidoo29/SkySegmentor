@@ -24,11 +24,17 @@ from .partition import get_partition_IDs
 from .partition import total_partition_weights
 from .partition import remove_val4array
 from .partition import fill_map
-from .partition import find_boundary_pix
-from .partition import get_most_dist_points
+from .partition import find_map_barycenter
+from .partition import find_points_barycenter
+from .partition import get_map_border
+from .partition import get_points_border
+from .partition import get_map_most_dist_points
+from .partition import get_points_most_dist_points
 from .partition import weight_dif
 from .partition import find_dphi
-from .partition import split_into_2
-from .partition import split_into_N
+from .partition import splitmap2
+from .partition import splitpoints2
+from .partition import splitmapN
+from .partition import splitpointsN
 
 from .utils import isscalar
