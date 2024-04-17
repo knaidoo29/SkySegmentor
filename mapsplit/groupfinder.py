@@ -1,7 +1,8 @@
 import numpy as np
+import healpy as hp
 
 
-def cascade(labels, indexin):
+def _cascade(labels, indexin):
     """Cascades down a linked list of label reassignments.
 
     Parameters
@@ -17,12 +18,12 @@ def cascade(labels, indexin):
         Cascaded label index out.
     """
     indexout = indexin
-    while labels[indexout - 1]  = indexout:
+    while labels[indexout - 1] != indexout:
         indexout = labels[indexout-1]
     return indexout
 
 
-def cascade_all(labels):
+def _cascade_all(labels):
     """Cascade label index for an array.
 
     Parameters
@@ -37,11 +38,11 @@ def cascade_all(labels):
     """
     labelsout = np.copy(labels)
     for i in range (0, len(labels)):
-        labelsout[i] = cascade(labels, labels[i])
+        labelsout[i] = _cascade(labels, labels[i])
     return labelsout
 
 
-def unionise(ind1, ind2, labels):
+def _unionise(ind1, ind2, labels):
     """Finds the union of two label indexes.
 
     Parameters
@@ -58,8 +59,8 @@ def unionise(ind1, ind2, labels):
     indout : int
         Index out.
     """
-    ind1out = cascade(labels, ind1)
-    ind2out = cascade(labels, ind2)
+    ind1out = _cascade(labels, ind1)
+    ind2out = _cascade(labels, ind2)
     if ind1out <= ind2out:
         indout = ind1out
     else:
@@ -67,7 +68,7 @@ def unionise(ind1, ind2, labels):
     return ind1out, ind2out, indout
 
 
-def shuffle_down(labels):
+def _shuffle_down(labels):
     """Shuffle label index for an array.
 
     Parameters
@@ -97,7 +98,19 @@ def shuffle_down(labels):
     return labelsout
 
 
-def HoshenKopelman_healpix(binmap):
+def unionfinder(binmap):
+    """Group or label assignment on a healpix grid using the HoshenKopelman algorithm.
+
+    Parameters
+    ----------
+    binmap : array
+        Binary healpix map.
+
+    Returns
+    -------
+    groupID : array
+        Labelled healpix map.
+    """
     """Group or label assignment on a healpix grid using the HoshenKopelman algorithm.
 
     Parameters
@@ -122,13 +135,13 @@ def HoshenKopelman_healpix(binmap):
             currentID += 1
             groupID[i] = currentID
             groupID_equals.append([])
-        if groupID[i]  = 0:
+        if groupID[i] != 0:
             neighs = hp.get_all_neighbours(nside, i)
-            neighs = neighs[neighs  = -1]
-            neighs = neighs[groupID[neighs]  = 0]
+            neighs = neighs[neighs != -1]
+            neighs = neighs[groupID[neighs] != 0]
             if len(neighs) > 0:
                 groupID[neighs[groupID[neighs] == -1]] = groupID[i]
-                neighs = neighs[groupID[neighs]  = groupID[i]]
+                neighs = neighs[groupID[neighs] != groupID[i]]
             if len(neighs) > 0:
                 groupID_equals[groupID[i]-1].append(np.unique(groupID[neighs]))
     groupID_equals2 = [np.unique(np.concatenate(_groupID)) for _groupID in groupID_equals]
@@ -146,11 +159,11 @@ def HoshenKopelman_healpix(binmap):
     groupID_pair2[cond] = groupID_pair1[cond]
     groupID_pair1[cond] = temp
     for i in range(0, len(groupID_pair1)):
-        ind1out, ind2out, indout = unionise(groupID_pair1[i], groupID_pair2[i], groupID_ind)
+        ind1out, ind2out, indout = _unionise(groupID_pair1[i], groupID_pair2[i], groupID_ind)
         groupID_ind[ind1out-1] = indout
         groupID_ind[ind2out-1] = indout
-    groupID_ind = cascade_all(groupID_ind)
-    groupID_ind = shuffle_down(groupID_ind)
-    cond = np.where(groupID  = 0)[0]
+    groupID_ind = _cascade_all(groupID_ind)
+    groupID_ind = _shuffle_down(groupID_ind)
+    cond = np.where(groupID != 0)[0]
     groupID[cond] = groupID_ind[groupID[cond]-1]
     return groupID

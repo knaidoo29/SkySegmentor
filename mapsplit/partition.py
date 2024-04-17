@@ -40,7 +40,6 @@ def total_partition_weights(partition, weights):
     """
     partition_IDs = get_partition_IDs(partition)
     Npartitions = np.max(partition_IDs)+1
-    #partitions_weights = magpie.pixels.bin_pix(partition, Npartition, weights=weights)
     partitions_weights = np.zeros(Npartition)
     np.add.at(partition_weights, partition_IDs, weights)
     return partition_IDs, partition_weights
@@ -99,6 +98,93 @@ def find_boundary_pix(nside, bnmap):
     return pixboundID
 
 
+def find_barycenter(bnmap, wmap=None):
+    """Determines the barycenter of center of mass direction of the input binary map.
+
+    Parameters
+    ----------
+    bnmap : array
+        binary map.
+    wmap : array, optional
+        The weights.
+
+    Returns
+    -------
+    phic, thec : float
+        The center
+    """
+    if wmap is None:
+        wmap = np.ones(len(bnmap))
+    nside = hp.npix2nside(len(bnmap))
+    pixID = np.where(bnmap != 0.)[0]
+    the, phi = hp.pix2ang(nside, pixID)
+    wei = wmap[pixID]
+    x, y, z = coords.sphere2cart(np.ones(len(phi)), phi, the, center=[0., 0., 0.])
+    xc = np.sum(x*wei)/np.sum(wei)
+    yc = np.sum(y*wei)/np.sum(wei)
+    zc = np.sum(z*wei)/np.sum(wei)
+    _, phic, thec = coords.cart2sphere(xc, yc, zc)
+    phir, ther = rotate.rotate_usphere(phi, the, [-phic, -thec, 0.])
+    themax = np.max(ther)
+    return phic, thec, themax
+
+
+def get_border(bnmap, wmap=None, res=[200, 100]):
+    """Determines the outer border of binary map region.
+
+    Parameters
+    ----------
+    bnmap : array
+        binary map.
+    wmap : array, optional
+        The weights.
+    res : list, optional
+        Resolution of spherical cap grid where [phiresolution, thetaresolution]
+        to find region border.
+
+    Returns
+    -------
+    phi_border, the_border : float
+        Approximate border region.
+    """
+    nside = hp.npix2nside(len(bnmap))
+    phic, thec, themax = find_barycenter(bnmap, wmap=wmap)
+
+    psize = res[0]
+    tsize = res[1]
+
+    pedges = np.linspace(0., 2*np.pi, psize + 1)
+    pmid = 0.5*(pedges[1:] + pedges[:-1])
+    tedges = np.linspace(0., np.max(themax)*1.05, tsize + 1)
+    tmid = 0.5*(tedges[1:] + tedges[:-1])
+
+    pcap, tcap = np.meshgrid(pmid, tmid, indexing='ij')
+    pshape = np.shape(pcap)
+
+    pcap_rot, tcap_rot = rotate.rotate_usphere(pcap.flatten(), tcap.flatten(), [0., thec, phic])
+    pixID = hp.ang2pix(nside, tcap_rot, pcap_rot)
+    wcap_rot = bnmap[pixID]
+
+    pcap_rot = pcap_rot.reshape(pshape)
+    tcap_rot = tcap_rot.reshape(pshape)
+    wcap_rot = wcap_rot.reshape(pshape)
+
+    phi_border, the_border = [], []
+
+    tind = np.arange(len(tmid))
+
+    for i in range(len(wcap_rot)):
+        if len(tind[wcap_rot[i] != 0.]) > 0:
+            ind = np.max(tind[wcap_rot[i] != 0.])
+            phi_border.append(pcap_rot[i,ind])
+            the_border.append(tcap_rot[i,ind])
+
+    phi_border = np.array(phi_border)
+    the_border = np.array(the_border)
+
+    return phi_border, the_border
+
+
 def get_most_dist_points(nside, bnmap, smooth=False):
     """Returns the most distant points on a binary map. Note there is an implicit
     assumption that the map does not span regions larger than a hemisphere.
@@ -132,6 +218,44 @@ def get_most_dist_points(nside, bnmap, smooth=False):
 
     pp1, pp2 = np.meshgrid(phi_bound, phi_bound, indexing='ij')
     tt1, tt2 = np.meshgrid(the_bound, the_bound, indexing='ij')
+    pp1, pp2, tt1, tt2 = pp1.flatten(), pp2.flatten(), tt1.flatten(), tt2.flatten()
+
+    dist = coords.distusphere(pp1, tt1, pp2, tt2)
+
+    ind = np.argmax(dist)
+    p1, p2 = pp1[ind], pp2[ind]
+    t1, t2 = tt1[ind], tt2[ind]
+    return p1, t1, p2, t2
+
+
+
+def get_most_dist_points_v2(nside, bnmap, wmap=None, res=[100, 50]):
+    """Returns the most distant points on a binary map. Note there is an implicit
+    assumption that the map does not span regions larger than a hemisphere.
+
+    Parameters
+    ----------
+    nside : int
+        HEalpix map nside.
+    bnmap : int array
+        Binary healpix map.
+    wmap : array, optional
+        The weights.
+    res : list, optional
+        Resolution of spherical cap grid where [phiresolution, thetaresolution]
+        to find region border.
+
+    Returns
+    -------
+    p1, t1, p2, t2 : float
+        Angular coordinates (phi, theta) for the most distant points (1 and 2) on
+        the binary map.
+    """
+
+    phi_border, theta_border = get_border(bnmap, wmap=wmap, res=res)
+
+    pp1, pp2 = np.meshgrid(phi_border, phi_border, indexing='ij')
+    tt1, tt2 = np.meshgrid(theta_border, theta_border, indexing='ij')
     pp1, pp2, tt1, tt2 = pp1.flatten(), pp2.flatten(), tt1.flatten(), tt2.flatten()
 
     dist = coords.distusphere(pp1, tt1, pp2, tt2)
@@ -194,7 +318,8 @@ def find_dphi(phi, weights, balance=1):
     return dphi
 
 
-def split_into_2(weightmap, balance=1, partitionmap=None, partition=None, smooth=False):
+def split_into_2(weightmap, balance=1, partitionmap=None, partition=None, smooth=False,
+    usenew=False):
     """Splits a map with weights into 2 equal (unequal in balance != 1).
 
     Parameters
@@ -236,10 +361,16 @@ def split_into_2(weightmap, balance=1, partitionmap=None, partition=None, smooth
     _the, _phi = hp.pix2ang(nside, _pixID)
     _weights = weightmap[_pixID]
 
-    p1, t1, p2, t2 = get_most_dist_points(nside, _bnmap, smooth=smooth)
-    a1, a2, a3 = rotate.rotate2plane([p1, t1], [p2, t2])
+    if np.sum(_bnmap) != len(_bnmap):
 
-    _phi, _the = rotate.forward_rotate(_phi, _the, a1, a2, a3)
+        if usenew:
+            p1, t1, p2, t2 = get_most_dist_points_v2(nside, _bnmap)
+        else:
+            p1, t1, p2, t2 = get_most_dist_points(nside, _bnmap, smooth=smooth)
+
+        a1, a2, a3 = rotate.rotate2plane([p1, t1], [p2, t2])
+
+        _phi, _the = rotate.forward_rotate(_phi, _the, a1, a2, a3)
 
     _dphi = find_dphi(_phi, _weights, balance=balance)
 
@@ -249,7 +380,7 @@ def split_into_2(weightmap, balance=1, partitionmap=None, partition=None, smooth
     return partitionmap
 
 
-def split_into_N(weightmap, Npartitions, smooth=False):
+def split_into_N(weightmap, Npartitions, smooth=False, usenew=False):
     """Splits a map with weights into equal Npartition sides.
 
     Parameters
@@ -289,6 +420,6 @@ def split_into_N(weightmap, Npartitions, smooth=False):
                 balance = wei2/wei1
 
                 partitionmap = split_into_2(weightmap, balance, partitionmap=partitionmap,
-                    partition=partition, smooth=smooth)
+                    partition=partition, smooth=smooth, usenew=usenew)
 
     return partitionmap

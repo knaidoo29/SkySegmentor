@@ -3,11 +3,11 @@ from .coords import cart2sphere
 from .coords import sphere2cart
 from .coords import distusphere
 
-from .groupfinder import cascade
-from .groupfinder import cascade_all
-from .groupfinder import unionise
-from .groupfinder import shuffle_down
-from .groupfinder import HoshenKopelman_healpix
+from .groupfinder import _cascade
+from .groupfinder import _cascade_all
+from .groupfinder import _unionise
+from .groupfinder import _shuffle_down
+from .groupfinder import unionfinder
 
 from .maths import vector_norm
 from .maths import vector_dot
