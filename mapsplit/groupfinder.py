@@ -98,6 +98,13 @@ def _shuffle_down(labels):
     return labelsout
 
 
+def _if_list_concatenate(arr):
+    """Concatenates list only if length is > 1."""
+    if len(arr) > 1:
+        arr = np.concatenate(arr)
+    return arr
+
+
 def unionfinder(binmap):
     """Group or label assignment on a healpix grid using the HoshenKopelman algorithm.
 
@@ -144,7 +151,7 @@ def unionfinder(binmap):
                 neighs = neighs[groupID[neighs] != groupID[i]]
             if len(neighs) > 0:
                 groupID_equals[groupID[i]-1].append(np.unique(groupID[neighs]))
-    groupID_equals2 = [np.unique(np.concatenate(_groupID)) for _groupID in groupID_equals]
+    groupID_equals2 = [np.unique(_if_list_concatenate(_groupID)) for _groupID in groupID_equals]
     groupID_ind = np.arange(len(groupID_equals)) + 1
     groupID_pair1 = []
     groupID_pair2 = []
