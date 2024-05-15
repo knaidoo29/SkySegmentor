@@ -40,8 +40,8 @@ def total_partition_weights(partition, weights):
     """
     partition_IDs = get_partition_IDs(partition)
     Npartitions = np.max(partition_IDs)+1
-    partitions_weights = np.zeros(Npartitions)
-    np.add.at(partition_weights, partition_IDs, weights)
+    partition_weights = np.zeros(Npartitions)
+    np.add.at(partition_weights, partition, weights)
     return partition_IDs, partition_weights
 
 
