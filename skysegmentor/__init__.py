@@ -32,9 +32,9 @@ from .partition import get_map_most_dist_points
 from .partition import get_points_most_dist_points
 from .partition import weight_dif
 from .partition import find_dphi
-from .partition import splitmap2
-from .partition import splitpoints2
-from .partition import splitmapN
-from .partition import splitpointsN
+from .partition import segmentmap2
+from .partition import segmentpoints2
+from .partition import segmentmapN
+from .partition import segmentpointsN
 
 from .utils import isscalar

@@ -350,8 +350,8 @@ def find_dphi(phi, weights, balance=1):
     return dphi
 
 
-def splitmap2(weightmap, balance=1, partitionmap=None, partition=None, res=[100, 50]):
-    """Splits a map with weights into 2 equal (unequal in balance != 1).
+def segmentmap2(weightmap, balance=1, partitionmap=None, partition=None, res=[100, 50]):
+    """Segment a map with weights into 2 equal (unequal in balance != 1).
 
     Parameters
     ----------
@@ -408,9 +408,9 @@ def splitmap2(weightmap, balance=1, partitionmap=None, partition=None, res=[100,
     return partitionmap
 
 
-def splitpoints2(phi, the, weights=None, balance=1, partitionID=None,
+def segmentpoints2(phi, the, weights=None, balance=1, partitionID=None,
     partition=None, res=100):
-    """Splits a map with weights into 2 equal (unequal in balance != 1).
+    """Segments a set of points with weights into 2 equal (unequal in balance != 1).
 
     Parameters
     ----------
@@ -463,8 +463,8 @@ def splitpoints2(phi, the, weights=None, balance=1, partitionID=None,
     return partitionID
 
 
-def splitmapN(weightmap, Npartitions, res=[100, 50]):
-    """Splits a map with weights into equal Npartition sides.
+def segmentmapN(weightmap, Npartitions, res=[100, 50]):
+    """Segment a map with weights into equal Npartition sides.
 
     Parameters
     ----------
@@ -506,14 +506,14 @@ def splitmapN(weightmap, Npartitions, res=[100, 50]):
 
                 balance = wei2/wei1
 
-                partitionmap = splitmap2(weightmap, balance=balance, partitionmap=partitionmap,
+                partitionmap = segmentmap2(weightmap, balance=balance, partitionmap=partitionmap,
                     partition=partition, res=res)
 
     return partitionmap
 
 
-def splitpointsN(phi, the, Npartitions, weights=None, res=100):
-    """Splits a map with weights into equal Npartition sides.
+def segmentpointsN(phi, the, Npartitions, weights=None, res=100):
+    """Segments a set of points with weights into equal Npartition sides.
 
     Parameters
     ----------
@@ -556,7 +556,7 @@ def splitpointsN(phi, the, Npartitions, weights=None, res=100):
 
                 balance = wei2/wei1
 
-                partitionID = splitpoints2(phi, the, weights=weights, balance=balance, partitionID=partitionID,
+                partitionID = segmentpoints2(phi, the, weights=weights, balance=balance, partitionID=partitionID,
                     partition=partition, res=res)
 
     return partitionID
