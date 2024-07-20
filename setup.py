@@ -10,12 +10,12 @@ with open(path.join(this_directory, 'README.md')) as f:
 
 exts = []
 
-setup(name = 'MapSplit',
-      version = '0.0.0',
-      description       = "MapSplit: Splits a binary map into several regions using the binary space partition algorithm.",
+setup(name = 'SkySegmentor',
+      version = "0.0.0",
+      description       = "SkySegmentor: Splits a binary map into several regions using the binary space partition algorithm.",
       long_description  = long_description,
       long_description_content_type = 'text/markdown',
-      url               = 'https://github.com/knaidoo29/MapSplit',
+      url               = 'https://github.com/knaidoo29/SkySegmentor',
       author            = "Krishna Naidoo",
       author_email      = "krishna.naidoo.11@ucl.ac.uk",
       license='MIT',

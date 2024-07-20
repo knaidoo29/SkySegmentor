@@ -60,7 +60,7 @@ if __name__ == "__main__":
     for i in range(0, len(list_of_lines)):
         if list_of_lines[i][:17] == '| Version       |':
             list_of_lines[i] = '| Version       | ' + vstr_after
-            for j in range(0, 38-len(vstr_after)):
+            for j in range(0, 44-len(vstr_after)):
                 list_of_lines[i] += ' '
             list_of_lines[i] += '|\n'
     readme_file.close()
@@ -74,31 +74,28 @@ if __name__ == "__main__":
 
     index_rst_file = open("docs/source/index.rst", "r")
     list_of_lines = index_rst_file.readlines()
-    for i in range(0, len(list_of_lines)):
-        if list_of_lines[i][:17] == '| Version       |':
-            list_of_lines[i] = '| Version       | ' + vstr_after
-            for j in range(0, 40-len(vstr_after)):
-                list_of_lines[i] += ' '
-            list_of_lines[i] += '|\n'
+    for i in range(1, len(list_of_lines)):
+        if list_of_lines[i-1][:15] == '    * - Version':
+            list_of_lines[i] = '      - ' + vstr_after + '\n'
     index_rst_file.close()
 
     index_rst_file = open("docs/source/index.rst", "w")
     index_rst_file.writelines(list_of_lines)
     index_rst_file.close()
 
-    print("")
-    print("Update meta.yaml")
-
-    meta_file = open("conda-recipe/meta.yaml", "r")
-    list_of_lines = meta_file.readlines()
-    for i in range(0, len(list_of_lines)):
-        if list_of_lines[i][:17] == '{% set version = ':
-            list_of_lines[i] = '{% set version = "' + vstr_after + '" %}\n'
-    meta_file.close()
-
-    meta_file = open("conda-recipe/meta.yaml", "w")
-    meta_file.writelines(list_of_lines)
-    meta_file.close()
+    # print("")
+    # print("Update meta.yaml")
+    #
+    # meta_file = open("conda-recipe/meta.yaml", "r")
+    # list_of_lines = meta_file.readlines()
+    # for i in range(0, len(list_of_lines)):
+    #     if list_of_lines[i][:17] == '{% set version = ':
+    #         list_of_lines[i] = '{% set version = "' + vstr_after + '" %}\n'
+    # meta_file.close()
+    #
+    # meta_file = open("conda-recipe/meta.yaml", "w")
+    # meta_file.writelines(list_of_lines)
+    # meta_file.close()
 
     print("")
     print("Update setup.py")
