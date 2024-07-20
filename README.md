@@ -100,7 +100,7 @@ if not all points are equal, you can specify a weight
 ```python
 weights = # define point weights
 partitionIDs = skysegmentor.segmentpointsN(phi, the, Npartitions, weights=weights)
-``` 
+```
 
 ## Citing
 

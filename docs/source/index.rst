@@ -3,7 +3,7 @@ SkySegmentor
 ============
 
 .. list-table::
-    :widths: 10 60
+    :widths: 20 100
     :header-rows: 0
     :stub-columns: 1
 
