@@ -1,17 +1,14 @@
-import setuptools
-from numpy.distutils.core import setup, Extension
+
+from setuptools import setup
 
 # read the contents of your README file
-from os import path
-this_directory = path.abspath(path.dirname(__file__))
 
-with open(path.join(this_directory, 'README.md')) as f:
+with open('README.md') as f:
     long_description = f.read()
 
-exts = []
 
 setup(name = 'SkySegmentor',
-      version = "0.0.0",
+      version = "0.0.1",
       description       = "SkySegmentor: Splits a binary map into several regions using the binary space partition algorithm.",
       long_description  = long_description,
       long_description_content_type = 'text/markdown',
@@ -21,7 +18,6 @@ setup(name = 'SkySegmentor',
       license='MIT',
       packages=setuptools.find_packages(),
       install_requires=['numpy', 'healpy'],
-      ext_modules = exts,
       python_requires = '>=3',
       classifiers=[
         'Development Status :: 5 - Production/Stable',
