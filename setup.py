@@ -8,8 +8,8 @@ with open('README.md') as f:
     long_description = f.read()
 
 
-setup(name = 'SkySegmentor',
-      version = "0.0.1",
+setup(name = 'skysegmentor',
+      version = "0.0.5",
       description       = "SkySegmentor: Splits a binary map into several regions using the binary space partition algorithm.",
       long_description  = long_description,
       long_description_content_type = 'text/markdown',

@@ -3,7 +3,7 @@
 |               |                                             |
 |---------------|---------------------------------------------|
 | Author        | Krishna Naidoo                              |               
-| Version       | 0.0.0                                       |
+| Version       | 0.0.5                                       |
 | Repository    | https://github.com/knaidoo29/SkySegmentor   |
 | Documentation | TBA                                         |
 
