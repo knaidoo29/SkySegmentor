@@ -44,5 +44,11 @@ templates_path = ['_templates']
 #html_theme = 'sphinx_rtd_theme'
 html_theme = 'furo'
 
+html_static_path = ["_static"]
+html_theme_options = {
+    "light_logo": "SkySegmentor_logo_small_white.jpg",
+    "dark_logo": "SkySegmentor_logo_small_black.jpg",
+}
+
 # -- Options for EPUB output
 epub_show_urls = 'footnote'

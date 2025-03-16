@@ -1,4 +1,5 @@
-# SkySegmentor
+![biglogo](docs/source/_static/SkySegmentor_logo_large_github.jpg)
+
 
 |               |                                             |
 |---------------|---------------------------------------------|
