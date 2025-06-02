@@ -8,7 +8,7 @@ import vinfo
 # -- Project information
 
 project = 'SkySegmentor'
-copyright = '2024, Krishna Naidoo'
+copyright = '2024-2025, Krishna Naidoo'
 author = 'Krishna Naidoo'
 
 version = vinfo.vstr
