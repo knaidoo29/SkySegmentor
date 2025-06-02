@@ -71,7 +71,7 @@ if __name__ == "__main__":
 
     print("")
     print("Update index.rst")
-
+    
     index_rst_file = open("docs/source/index.rst", "r")
     list_of_lines = index_rst_file.readlines()
     for i in range(1, len(list_of_lines)):
@@ -83,32 +83,16 @@ if __name__ == "__main__":
     index_rst_file.writelines(list_of_lines)
     index_rst_file.close()
 
-    # print("")
-    # print("Update meta.yaml")
-    #
-    # meta_file = open("conda-recipe/meta.yaml", "r")
-    # list_of_lines = meta_file.readlines()
-    # for i in range(0, len(list_of_lines)):
-    #     if list_of_lines[i][:17] == '{% set version = ':
-    #         list_of_lines[i] = '{% set version = "' + vstr_after + '" %}\n'
-    # meta_file.close()
-    #
-    # meta_file = open("conda-recipe/meta.yaml", "w")
-    # meta_file.writelines(list_of_lines)
-    # meta_file.close()
-
     print("")
-    print("Update setup.py")
+    print("Update VERSION")
 
-    setup_file = open("setup.py", "r")
+    setup_file = open("VERSION", "r")
     list_of_lines = setup_file.readlines()
-    for i in range(0, len(list_of_lines)):
-
-        if list_of_lines[i][:15] == '      version =':
-            list_of_lines[i] = '      version = "' + vstr_after + '",\n'
+    for i in range(0, 1):
+        list_of_lines[i] = '%s' % vstr_after
     setup_file.close()
 
-    setup_file = open("setup.py", "w")
+    setup_file = open("VERSION", "w")
     setup_file.writelines(list_of_lines)
     setup_file.close()
 

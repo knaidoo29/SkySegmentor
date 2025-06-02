@@ -2,19 +2,19 @@
 
 
 |               |                                             |
-|---------------|---------------------------------------------|
-| Author        | Krishna Naidoo                              |               
-| Version       | 0.0.5                                       |
+|---------------|---------------------------------------------|        
+| Version       | 0.0.6                                       |
 | Repository    | https://github.com/knaidoo29/SkySegmentor   |
-| Documentation | TBA                                         |
+| Documentation | https://skysegmentor.readthedocs.io/        |
 
 ## Introduction
 
-SkySegmentor is a python 3 package for splitting binary (or weighted) HEALPix maps
-or points on the sphere into equally weighted segments. The segmentation uses a
-sequential binary space partitioning scheme, a generalisation of the k-d tree
-algorithm. By definition all partitions are approximately equal (with errors the
-size of the HEALPix pixel scale).
+**SkySegmentor** is a ``python 3`` package for dividing points or maps (in ``HEALPix``
+format) on the celestial sphere into equal-sized segments. It employs a sequential 
+binary space partitioning scheme -- a generalization of the *k*-d tree algorithm -- 
+that supports segmentation of arbitrarily shaped sky regions. By design, all 
+partitions are approximately equal in area, with discrepancies no larger than the 
+``HEALPix`` pixel scale.
 
 ## Dependencies
 
