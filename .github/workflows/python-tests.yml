@@ -24,15 +24,29 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pytest pytest-cov scipy==1.10.0
+          pip install pytest pytest-cov scipy==1.11.0
           pip install -r requirements.txt
 
       - name: Run tests with coverage
         run: |
-          pytest --cov=skysegmentor tests/
+          pytest --cov=skysegmentor --cov-report=term --cov-report=xml --cov-report=html tests/
 
-      - name: Upload coverage report
+      - name: List files for debug
+        run: |
+          ls -alh
+          ls -alh htmlcov || true
+
+      - name: Upload .coverage file
+        if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: coverage-report
+          name: coverage-data
           path: .coverage
+
+      - name: Upload coverage HTML report
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-html
+          path: htmlcov/
+
