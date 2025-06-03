@@ -1,10 +1,28 @@
 ![biglogo](docs/source/_static/SkySegmentor_logo_large_github.jpg)
 
-[![PyPI version](https://img.shields.io/pypi/v/skysegmentor.svg)](https://pypi.org/project/skysegmentor/)
+<p align="center">
+    <a href="https://pypi.org/project/skysegmentor/">
+    <img src="https://img.shields.io/pypi/v/skysegmentor.svg" alt="PyPI version">
+    </a>
+    <a href="https://github.com/knaidoo29/SkySegmentor">
+    <img src="https://img.shields.io/badge/GitHub-repo-blue?logo=github" alt="GitHub repository">
+    </a>
+    <a href="https://skysegmentor.readthedocs.io/en/latest/">
+    <img src="https://readthedocs.org/projects/skysegmentor/badge/?version=latest" alt="Documentation Status">
+    </a>
+    <a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT">
+    </a>
+    <a href="https://github.com/psf/black">
+    <img src="https://img.shields.io/badge/code%20style-black-000000.svg" alt="Code style: black">
+    </a>
+</p>
+
+<!-- [![PyPI version](https://img.shields.io/pypi/v/skysegmentor.svg)](https://pypi.org/project/skysegmentor/)
 [![GitHub](https://img.shields.io/badge/GitHub-repo-blue?logo=github)](https://github.com/knaidoo29/SkySegmentor)
 [![Docs](https://readthedocs.org/projects/skysegmentor/badge/?version=latest)](https://skysegmentor.readthedocs.io/en/latest/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black) -->
 
 ## Introduction
 

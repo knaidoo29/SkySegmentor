@@ -7,21 +7,45 @@
    :align: center
    :class: only-dark
 
-.. image:: https://img.shields.io/pypi/v/skysegmentor.svg
-   :target: https://pypi.org/project/skysegmentor/
-   :alt: PyPI version
+.. raw:: html
 
-.. image:: https://img.shields.io/badge/GitHub-repo-blue?logo=github
-   :target: https://github.com/knaidoo29/SkySegmentor
-   :alt: GitHub repository
+   <p align="center">
+     <a href="https://pypi.org/project/skysegmentor/">
+       <img src="https://img.shields.io/pypi/v/skysegmentor.svg" alt="PyPI version">
+     </a>
+     <a href="https://github.com/knaidoo29/SkySegmentor">
+       <img src="https://img.shields.io/badge/GitHub-repo-blue?logo=github" alt="GitHub repository">
+     </a>
+     <a href="https://skysegmentor.readthedocs.io/en/latest/">
+       <img src="https://readthedocs.org/projects/skysegmentor/badge/?version=latest" alt="Documentation Status">
+     </a>
+     <a href="https://opensource.org/licenses/MIT">
+       <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT">
+     </a>
+     <a href="https://github.com/psf/black">
+       <img src="https://img.shields.io/badge/code%20style-black-000000.svg" alt="Code style: black">
+     </a>
+   </p>
 
-.. image:: https://readthedocs.org/projects/skysegmentor/badge/?version=latest
-   :target: https://skysegmentor.readthedocs.io/en/latest/
-   :alt: Documentation Status
+.. 
+   .. image:: https://img.shields.io/pypi/v/skysegmentor.svg
+      :target: https://pypi.org/project/skysegmentor/
+      :alt: PyPI version
 
-.. image:: https://img.shields.io/badge/License-MIT-yellow.svg
-   :target: https://opensource.org/licenses/MIT
-   :alt: License: MIT
+   .. image:: https://img.shields.io/badge/GitHub-repo-blue?logo=github
+      :target: https://github.com/knaidoo29/SkySegmentor
+      :alt: GitHub repository
+
+   .. image:: https://readthedocs.org/projects/skysegmentor/badge/?version=latest
+      :target: https://skysegmentor.readthedocs.io/en/latest/
+      :alt: Documentation Status
+
+   .. image:: https://img.shields.io/badge/License-MIT-yellow.svg
+      :target: https://opensource.org/licenses/MIT
+      :alt: License: MIT
+
+   .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
+      :target: https://github.com/psf/black
 
 Contents
 ========
