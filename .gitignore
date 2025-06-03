@@ -6,5 +6,7 @@ dist/*
 SkySegmentor.egg-info
 build
 dist
+.pytest_cache
+.pytest_cache/*
 
 docs/build/*

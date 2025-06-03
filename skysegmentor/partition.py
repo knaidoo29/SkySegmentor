@@ -97,6 +97,9 @@ def find_map_barycenter(
     """
     if wmap is None:
         wmap = np.ones(len(bnmap))
+    pixID = np.where(bnmap != 0.0)[0]
+    if len(pixID) == 0:
+        raise ValueError("Binary map must contain at least one non-zero pixel.")
     nside = hp.npix2nside(len(bnmap))
     pixID = np.where(bnmap != 0.0)[0]
     the, phi = hp.pix2ang(nside, pixID)
@@ -128,6 +131,12 @@ def find_points_barycenter(
     phic, thec : float
         The center
     """
+    if len(phi) == 0 or len(the) == 0:
+        raise ValueError("Input arrays phi and the must not be empty.")
+    if len(phi) != len(the):
+        raise ValueError("Input arrays phi and the must have the same length.")
+    if weights is not None and len(weights) != len(phi):
+        raise ValueError("Weights array must be the same length as phi and the.")
     if weights is None:
         weights = np.ones(len(phi))
     x, y, z = coords.sphere2cart(np.ones(len(phi)), phi, the, center=[0.0, 0.0, 0.0])
@@ -222,6 +231,10 @@ def get_points_border(
     phi_border, the_border : array
         Approximate border region.
     """
+
+    if phi.size == 0 or the.size == 0:
+        raise ValueError("Input point set is empty")
+
     phic, thec, themax = find_points_barycenter(phi, the, weights=weights)
 
     pedges = np.linspace(0.0, 2 * np.pi, res + 1)
@@ -304,6 +317,9 @@ def get_points_most_dist_points(
         the binary map.
     """
 
+    if len(phi) == 0 or len(the) == 0:
+        raise ValueError("Input coordinate arrays are empty.")
+
     phi_border, the_border = get_points_border(phi, the, weights=weights, res=res)
 
     pp1, pp2 = np.meshgrid(phi_border, phi_border, indexing="ij")
@@ -348,7 +364,7 @@ def find_dphi(phi: np.ndarray, weights: np.ndarray, balance: int = 1) -> float:
 
     Parameters
     ----------
-    hi : array
+    phi : array
         Longitude coordinates.
     weights : array
         Weights corresponding to each longitude coordinates.
@@ -358,6 +374,10 @@ def find_dphi(phi: np.ndarray, weights: np.ndarray, balance: int = 1) -> float:
     dphi : float
         Splitting longitude.
     """
+    cond = np.where(weights != 0.0)[0]
+    if len(cond) == 0:
+        raise ValueError("Weights must contain at least one non-zero value.")
+    
     dphis = np.linspace(phi.min(), phi.max(), 100)
     _dphi = dphis[1] - dphis[0]
     weights_dif = np.array(
@@ -523,6 +543,9 @@ def segmentmapN(
     partitionmap : int array
         Partitioned map IDs.
     """
+    if Npartitions <= 1:
+        raise ValueError("Npartitions must be > 1.")
+    
     # The number of partitions currently assigned for each partition ID.
     part_Npart = np.zeros(Npartitions)
     part_Npart[0] = Npartitions
@@ -583,6 +606,9 @@ def segmentpointsN(
     partitionmap : int array
         Partitioned map IDs.
     """
+    if Npartitions <= 1:
+        raise ValueError("Npartitions must be > 1.")
+    
     # The number of partitions currently assigned for each partition ID.
     part_Npart = np.zeros(Npartitions)
     part_Npart[0] = Npartitions
