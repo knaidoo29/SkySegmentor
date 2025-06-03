@@ -1,7 +1,7 @@
 import numpy as np
 from typing import List, Tuple, Union
 
-from . import coords, maths
+from . import coords, maths, utils
 
 
 def _rotmat_x(angle: float) -> np.ndarray:
@@ -218,7 +218,7 @@ def rotate_usphere(
     angles : list
         Euler angles defining rotations about the z-axis, y-axis then z-axis.
     """
-    if np.isscalar(phi):
+    if utils.isscalar(phi):
         r = 1.0
     else:
         r = np.ones(len(phi))

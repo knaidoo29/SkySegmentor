@@ -6,6 +6,7 @@ from .groupfinder import _cascade
 from .groupfinder import _cascade_all
 from .groupfinder import _unionise
 from .groupfinder import _shuffle_down
+from .groupfinder import _if_list_concatenate
 from .groupfinder import unionfinder
 
 from .maths import vector_norm
@@ -13,6 +14,12 @@ from .maths import vector_dot
 from .maths import vector_cross
 from .maths import matrix_dot_3by3
 
+from .rotate import _rotmat_x
+from .rotate import _rotmat_y
+from .rotate import _rotmat_z
+from .rotate import _rotmat_axis
+from .rotate import _rotmat_euler
+from .rotate import _rotate_3d
 from .rotate import rotate3d_Euler
 from .rotate import rotate_usphere
 from .rotate import midpoint_usphere

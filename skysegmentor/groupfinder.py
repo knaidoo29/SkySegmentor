@@ -82,6 +82,7 @@ def _shuffle_down(labels: np.ndarray) -> np.ndarray:
     labelsout : int array
         Cascade all label index in an array.
     """
+    assert np.all(labels > 0)
     labelsout = np.copy(labels)
     nlabels = np.zeros(len(labels))
     for i in range(0, len(labels)):
