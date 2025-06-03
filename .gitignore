@@ -10,3 +10,8 @@ dist
 .pytest_cache/*
 
 docs/build/*
+
+# coverage.py files
+.coverage
+htmlcov/
+coverage.xml
