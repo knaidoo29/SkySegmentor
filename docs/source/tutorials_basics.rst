@@ -19,6 +19,7 @@ Segmenting a Healpix Maps
 .. image:: _static/partitionmap1.png
     :align: center
 
+
 Segmenting Points on the Sphere
 -------------------------------
 
