@@ -20,7 +20,7 @@ def _cascade(labels: np.ndarray, indexin: int) -> int:
     """
     indexout = indexin
     while labels[indexout - 1] != indexout:
-        indexout = labels[indexout-1]
+        indexout = labels[indexout - 1]
     return indexout
 
 
@@ -38,7 +38,7 @@ def _cascade_all(labels: np.ndarray) -> np.ndarray:
         Cascade all label index in an array.
     """
     labelsout = np.copy(labels)
-    for i in range (0, len(labels)):
+    for i in range(0, len(labels)):
         labelsout[i] = _cascade(labels, labels[i])
     return labelsout
 
@@ -85,8 +85,8 @@ def _shuffle_down(labels: np.ndarray) -> np.ndarray:
     labelsout = np.copy(labels)
     nlabels = np.zeros(len(labels))
     for i in range(0, len(labels)):
-        nlabels[labels[i]-1] = nlabels[labels[i]-1] + 1
-    maplabel = np.zeros(len(labels)).astype('int')
+        nlabels[labels[i] - 1] = nlabels[labels[i] - 1] + 1
+    maplabel = np.zeros(len(labels)).astype("int")
     j = 0
     for i in range(0, len(labels)):
         if nlabels[i] > 0:
@@ -95,7 +95,7 @@ def _shuffle_down(labels: np.ndarray) -> np.ndarray:
         else:
             maplabel[i] = 0
     for i in range(0, len(labels)):
-        labelsout[i] = maplabel[labels[i]-1]
+        labelsout[i] = maplabel[labels[i] - 1]
     return labelsout
 
 
@@ -133,7 +133,7 @@ def unionfinder(binmap: np.ndarray) -> np.ndarray:
     """
     nside = hp.npix2nside(len(binmap))
     groupID = np.zeros(hp.nside2npix(nside))
-    groupID = groupID.astype('int')
+    groupID = groupID.astype("int")
     cond = np.where(binmap == 1)[0]
     groupID[cond] = -1
     groupID_equals = []
@@ -151,8 +151,10 @@ def unionfinder(binmap: np.ndarray) -> np.ndarray:
                 groupID[neighs[groupID[neighs] == -1]] = groupID[i]
                 neighs = neighs[groupID[neighs] != groupID[i]]
             if len(neighs) > 0:
-                groupID_equals[groupID[i]-1].append(np.unique(groupID[neighs]))
-    groupID_equals2 = [np.unique(_if_list_concatenate(_groupID)) for _groupID in groupID_equals]
+                groupID_equals[groupID[i] - 1].append(np.unique(groupID[neighs]))
+    groupID_equals2 = [
+        np.unique(_if_list_concatenate(_groupID)) for _groupID in groupID_equals
+    ]
     groupID_ind = np.arange(len(groupID_equals)) + 1
     groupID_pair1 = []
     groupID_pair2 = []
@@ -167,11 +169,13 @@ def unionfinder(binmap: np.ndarray) -> np.ndarray:
     groupID_pair2[cond] = groupID_pair1[cond]
     groupID_pair1[cond] = temp
     for i in range(0, len(groupID_pair1)):
-        ind1out, ind2out, indout = _unionise(groupID_pair1[i], groupID_pair2[i], groupID_ind)
-        groupID_ind[ind1out-1] = indout
-        groupID_ind[ind2out-1] = indout
+        ind1out, ind2out, indout = _unionise(
+            groupID_pair1[i], groupID_pair2[i], groupID_ind
+        )
+        groupID_ind[ind1out - 1] = indout
+        groupID_ind[ind2out - 1] = indout
     groupID_ind = _cascade_all(groupID_ind)
     groupID_ind = _shuffle_down(groupID_ind)
     cond = np.where(groupID != 0)[0]
-    groupID[cond] = groupID_ind[groupID[cond]-1]
+    groupID[cond] = groupID_ind[groupID[cond] - 1]
     return groupID
