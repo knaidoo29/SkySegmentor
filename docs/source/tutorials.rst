@@ -7,3 +7,4 @@ Tutorials
 
   tutorials_basics
   tutorials_advance
+  tutorials_analysis

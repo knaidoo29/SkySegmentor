@@ -257,5 +257,3 @@ If the points have weights, then this can simply be added as
 
 .. image:: _static/partitionweightpoints.png
     :align: center
-
-
