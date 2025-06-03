@@ -35,18 +35,18 @@ jobs:
         run: |
           ls -alh
           ls -alh htmlcov || true
-
-      - name: Upload .coverage file
+      
+      - name: Upload coverage data
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: coverage-data
+          name: coverage-${{ matrix.python-version }}
           path: .coverage
-
+      
       - name: Upload coverage HTML report
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: coverage-html
+          name: coverage-html-${{ matrix.python-version }}
           path: htmlcov/
 
