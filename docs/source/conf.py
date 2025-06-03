@@ -2,6 +2,7 @@
 import os
 import sys
 sys.path.insert(0, os.path.abspath('../..'))
+sys.path.insert(0, os.path.abspath('../../skysegmentor'))
 
 import vinfo
 
@@ -22,9 +23,11 @@ extensions = [
     'sphinx.ext.autosummary',
     'sphinx.ext.intersphinx',
     'sphinx.ext.napoleon',
+    'sphinx.ext.viewcode',
     'sphinx.ext.mathjax',
     'sphinx_simplepdf'
 ]
+
 
 source_suffix = ['.rst', '.md']
 
@@ -38,6 +41,8 @@ intersphinx_mapping = {
 intersphinx_disabled_domains = ['std']
 
 templates_path = ['_templates']
+
+autodoc_typehints = 'none'
 
 # -- Options for HTML output
 

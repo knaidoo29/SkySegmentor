@@ -1,9 +1,10 @@
 import numpy as np
+from typing import List, Tuple, Union
 
 from . import maths, utils
 
 
-def cart2sphere(x, y, z, center=[0., 0., 0.]):
+def cart2sphere(x:np.ndarray, y:np.ndarray, z:np.ndarray, center:List[float]=[0., 0., 0.]) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Return polar coordinates for a given set of cartesian coordinates.
 
     Parameters
@@ -12,6 +13,8 @@ def cart2sphere(x, y, z, center=[0., 0., 0.]):
         x coordinate.
     y : array
         y coordinate.
+    z : array
+        z coordinate.
     center : list
         Center point of polar coordinate grid.
 
@@ -42,7 +45,7 @@ def cart2sphere(x, y, z, center=[0., 0., 0.]):
     return r, phi, theta
 
 
-def sphere2cart(r, phi, theta, center=[0., 0., 0.]):
+def sphere2cart(r: np.ndarray, phi: np.ndarray, theta: np.ndarray, center: List[float]=[0., 0., 0.]) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Converts spherical polar coordinates into cartesian coordinates.
 
     Parameters
@@ -72,7 +75,7 @@ def sphere2cart(r, phi, theta, center=[0., 0., 0.]):
     return x, y, z
 
 
-def distusphere(phi1, theta1, phi2, theta2):
+def distusphere(phi1: Union[float, np.ndarray], theta1: Union[float, np.ndarray], phi2: Union[float, np.ndarray], theta2: Union[float, np.ndarray]) -> Union[float, np.ndarray]:
     """Compute angular (great-arc) distance between two points on a unit
     sphere.
 

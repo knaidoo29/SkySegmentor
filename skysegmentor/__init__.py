@@ -14,6 +14,7 @@ from .maths import vector_dot
 from .maths import vector_cross
 from .maths import matrix_dot_3by3
 
+from .rotate import rotate3d_Euler
 from .rotate import rotate_usphere
 from .rotate import midpoint_usphere
 from .rotate import rotate2plane

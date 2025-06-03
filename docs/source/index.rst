@@ -6,22 +6,22 @@
 .. image:: _static/SkySegmentor_logo_large_black.jpg
    :align: center
    :class: only-dark
-  
-============
-SkySegmentor
-============
 
-.. list-table::
-    :widths: 20 100
-    :header-rows: 0
-    :stub-columns: 1
+.. image:: https://img.shields.io/pypi/v/skysegmentor.svg
+   :target: https://pypi.org/project/skysegmentor/
+   :alt: PyPI version
 
-    * - Version
-      - 0.0.6
-    * - Repository
-      - https://github.com/knaidoo29/SkySegmentor
-    * - Documentation
-      - https://skysegmentor.readthedocs.io/
+.. image:: https://img.shields.io/badge/GitHub-repo-blue?logo=github
+   :target: https://github.com/knaidoo29/SkySegmentor
+   :alt: GitHub repository
+
+.. image:: https://readthedocs.org/projects/skysegmentor/badge/?version=latest
+   :target: https://skysegmentor.readthedocs.io/en/latest/
+   :alt: Documentation Status
+
+.. image:: https://img.shields.io/badge/License-MIT-yellow.svg
+   :target: https://opensource.org/licenses/MIT
+   :alt: License: MIT
 
 Contents
 ========
@@ -31,9 +31,8 @@ Contents
 * `Installation`_
 * `Tutorials`_
 * `API`_
-* `Contributors`_
+* `Citing`_
 * `Support`_
-* `Version History`_
 
 Introduction
 ============
@@ -48,31 +47,25 @@ partitions are approximately equal in area, with discrepancies no larger than th
 Dependencies
 ============
 
-* `numpy <http://www.numpy.org/>`_
-* `healpy <https://healpy.readthedocs.io/en/latest/>`_
+* `numpy <http://www.numpy.org/>`_ -- versions: ``>=1.22,<1.27``
+* `healpy <https://healpy.readthedocs.io/en/latest/>`_ -- versions: ``>=1.15.0``
 
 Installation
 ============
 
-SkySegmentor can be installed by first cloning the repository
+First cloning the repository
 
 .. code-block:: bash
 
     git clone https://github.com/knaidoo29/SkySegmentor.git
     cd SkySegmentor
 
-and install by either running
+and install by running
 
 .. code-block:: bash
 
     pip install . [--user]
 
-or
-
-.. code-block:: bash
-
-    python setup.py build
-    python setup.py install
 
 You should now be able to import the module:
 
@@ -82,52 +75,6 @@ You should now be able to import the module:
 
 Tutorials
 =========
-
-Basic Usage
------------
-
-Segmenting Healpix Maps
-^^^^^^^^^^^^^^^^^^^^^^^
-
-.. code-block:: python
-
-    import healpy
-    import skysegmentor
-
-    # Healpix mask, where zeros are regions outside of the mask and ones inside the
-    # mask. You can also input a weighted map, where instead of 1s you give weights.
-    mask = # define mask values
-
-    Npartitions = 100 # Number of partitions
-    partitionmap = skysegmentor.segmentmapN(mask, Npartitions)
-
-Segmenting Points on the Sphere
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. code-block:: python
-
-    import skysegmentor
-
-    # Define points on the sphere to be segmented.
-    phi = # longitude defined in radians from [0, 2*pi]
-    the = # latitude defined in radians from [0, pi], where 0 = North Pole.
-
-    Npartitions = 100 # Number of partitions
-    partitionIDs = skysegmentor.segmentpointsN(phi, the, Npartitions)
-
-if using RA and Dec in degrees you can convert to phi and the using
-
-.. code-block:: python
-
-    phi = np.deg2rad(ra)
-    the = np.deg2rad(90. - dec)
-
-if not all points are equal, you can specify a weight
-
-.. code-block:: python
-
-    weights = # define point weights
-    partitionIDs = skysegmentor.segmentpointsN(phi, the, Npartitions, weights=weights)
 
 .. toctree::
   :maxdepth: 2
@@ -143,16 +90,27 @@ API
   api
 
 
-Contributors
-============
+Citing
+======
 
-If you use ``SkySegmentor`` in a publication please cite::
+.. warning::
 
-    TBA
+  These are placeholders to be replaced upon publication on ArXiv.
 
-and include a link to the SkySegmentor main page::
+If you use ``SkySegmentor`` in a publication please cite:
 
-    https://github.com/knaidoo29/SkySegmentor
+* NASA ADS:
+* ArXiv:
+
+BibTex::
+
+    @ARTICLE{Naidoo2025,
+        author = {{Euclid Collaboration} and {Naidoo}, K. and {Ruiz-Zapatero}, J. 
+        and {Tessore}, N. and {Joachimi}, B. and {Loureiro}, A. and others ...},
+        title = "{Euclid preparation: TBD. Accurate and precise data-driven angular power spectrum covariances}"
+     }
+
+and include a link to the SkySegmentor documentation page: https://skysegmentor.readthedocs.io/
 
 Support
 =======
@@ -160,8 +118,3 @@ Support
 If you have any issues with the code or want to suggest ways to improve it please
 open a new issue (`here <https://github.com/knaidoo29/SkySegmentor/issues>`_) or
 (if you don't have a github account) email krishna.naidoo.11@ucl.ac.uk.
-
-Version History
-===============
-
-* **Version 0.0.0**:

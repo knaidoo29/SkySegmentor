@@ -1,11 +1,10 @@
 ![biglogo](docs/source/_static/SkySegmentor_logo_large_github.jpg)
 
+[![PyPI version](https://img.shields.io/pypi/v/skysegmentor.svg)](https://pypi.org/project/skysegmentor/)
+[![GitHub](https://img.shields.io/badge/GitHub-repo-blue?logo=github)](https://github.com/knaidoo29/SkySegmentor)
+[![Docs](https://readthedocs.org/projects/skysegmentor/badge/?version=latest)](https://skysegmentor.readthedocs.io/en/latest/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-|               |                                             |
-|---------------|---------------------------------------------|        
-| Version       | 0.0.6                                       |
-| Repository    | https://github.com/knaidoo29/SkySegmentor   |
-| Documentation | https://skysegmentor.readthedocs.io/        |
 
 ## Introduction
 
@@ -18,29 +17,22 @@ partitions are approximately equal in area, with discrepancies no larger than th
 
 ## Dependencies
 
-* `numpy`
-* `healpy`
+* `numpy>=1.22,<1.27`
+* `healpy>=1.15.0`
 
 ## Installation
 
-SkySegmentor can be installed by first cloning the repository
+First clone the repository
 
 ```
 git clone https://github.com/knaidoo29/SkySegmentor.git
 cd SkySegmentor
 ```
 
-and install by either running
+and install by running
 
 ```
 pip install . [--user]
-```
-
-or
-
-```
-python setup.py build
-python setup.py install
 ```
 
 You should now be able to import the module:
@@ -51,12 +43,7 @@ import skysegmentor
 
 ## Documentation
 
-Documentation, including tutorials and explanation of API, can be found here TBA.
-Alternatively a PDF version of the documentation is located in the ``docs/`` folder
-called ``skysegmentor.pdf``. Offline documentation can be generating by running
-``make html`` in the ``docs/`` folder which will generate html documentation in
-the ``docs/build/html`` folder that can be accessed by opening the ``index.html``
-file in a browser.
+Documentation, including tutorials and explanation of API, can be found here ``https://skysegmentor.readthedocs.io/``. Alternatively a PDF version of the documentation is located in the ``docs/`` folder called ``skysegmentor.pdf``. Offline documentation can be generating by running ``make html`` in the ``docs/`` folder which will generate html documentation in the ``docs/build/html`` folder that can be accessed by opening the ``index.html`` file in a browser.
 
 ## Tutorial
 
@@ -105,11 +92,25 @@ partitionIDs = skysegmentor.segmentpointsN(phi, the, Npartitions, weights=weight
 
 ## Citing
 
-You can cite ``SkySegmentor`` using the following BibTex:
+``SkySegmentor`` was developed as part of the Euclid angular power spectra internal covariance pipeline. If you use ``SkySegmentor`` please cite this paper, which can be found here:
 
-```
-TBA
-```
+**--THESE ARE PLACEHOLDERS TO BE UPDATED LATER--**
+* NASA ADS:
+* ArXiv: 
+* BibTex:
+    ```
+    @ARTICLE{Naidoo2025,
+            author = {{Euclid Collaboration} and {Naidoo}, K. and 
+            {Ruiz-Zapatero}, J. and {Tessore}, N. and 
+            {Joachimi}, B. and {Loureiro}, A. and
+            others ...}
+            title = "{Euclid preparation: TBD. Accurate and precise data-driven angular power spectrum covariances}
+    }
+    ```
+
+and include a link to the SkySegmentor documentation page:
+
+    https://skysegmentor.readthedocs.io/
 
 ## Support
 
