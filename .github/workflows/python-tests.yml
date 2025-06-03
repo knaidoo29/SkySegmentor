@@ -1,4 +1,4 @@
-name: Python 3.8-3.11
+name: Python Tests
 
 on:
   push:
