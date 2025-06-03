@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def vector_norm(a):
+def vector_norm(a: np.ndarray) -> float:
     """Returns the magnitude a vector.
 
     Parameters
@@ -13,7 +13,7 @@ def vector_norm(a):
     return np.sqrt(a1**2. + a2**2. + a3**2.)
 
 
-def vector_dot(a, b):
+def vector_dot(a: np.ndarray, b: np.ndarray) -> float:
     """Returns the vector dot product.
 
     Parameters
@@ -28,7 +28,7 @@ def vector_dot(a, b):
     return a1*b1 + a2*b2 + a3*b3
 
 
-def vector_cross(a, b):
+def vector_cross(a: np.ndarray, b: np.ndarray) -> np.ndarray:
     """Returns the vector cross product.
 
     Parameters
@@ -52,7 +52,7 @@ def vector_cross(a, b):
     return s
 
 
-def matrix_dot_3by3(mat1, mat2):
+def matrix_dot_3by3(mat1: np.ndarray, mat2: np.ndarray) -> np.ndarray:
     """Dot product of 2 3x3 matrices.
 
     Parameters

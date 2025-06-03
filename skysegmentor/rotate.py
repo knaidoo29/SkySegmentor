@@ -1,9 +1,10 @@
 import numpy as np
+from typing import List, Tuple, Union
 
 from . import coords, maths
 
 
-def _rotmat_x(angle):
+def _rotmat_x(angle: float) -> np.ndarray:
     """Rotation matrix for rotation around the x-axis.
 
     Parameters
@@ -20,7 +21,7 @@ def _rotmat_x(angle):
     return rotx
 
 
-def _rotmat_y(angle):
+def _rotmat_y(angle: float) -> np.ndarray:
     """Rotation matrix for rotation around the y-axis.
 
     Parameters
@@ -37,7 +38,7 @@ def _rotmat_y(angle):
     return roty
 
 
-def _rotmat_z(angle):
+def _rotmat_z(angle: float) -> np.ndarray:
     """Rotation matrix for rotation around the z-axis.
 
     Parameters
@@ -54,7 +55,7 @@ def _rotmat_z(angle):
     return rotz
 
 
-def _rotmat_axis(angle, axis):
+def _rotmat_axis(angle: float, axis: int) -> np.ndarray:
     """Rotation matrix for any given axis.
 
     Parameters
@@ -72,7 +73,7 @@ def _rotmat_axis(angle, axis):
         return _rotmat_z(angle)
 
 
-def _rotmat_euler(angles, axes):
+def _rotmat_euler(angles: float, axes: int) -> np.ndarray:
     """Euler rotational matrix.
 
     Parameters
@@ -95,7 +96,7 @@ def _rotmat_euler(angles, axes):
     return _rot
 
 
-def _rotate_3d(x, y, z, rot):
+def _rotate_3d(x: np.ndarray, y: np.ndarray, z: np.ndarray, rot: np.ndarray) -> np.ndarray:
     """Rotates cartesian coordinates given an input rotational matrix.
 
     Parameters
@@ -116,7 +117,7 @@ def _rotate_3d(x, y, z, rot):
     return xrot, yrot, zrot
 
 
-def rotate3d_Euler(x, y, z, angles, axes='zyz', center=[0., 0., 0.]):
+def rotate3d_Euler(x: Union[float, np.ndarray], y: Union[float, np.ndarray], z: Union[float, np.ndarray], angles: np.ndarray, axes: str='zyz', center: List[float]=[0., 0., 0.]) -> Tuple[Union[float, np.ndarray], Union[float, np.ndarray], Union[float, np.ndarray]]:
     """Rotates points in 3D cartesian coordinates by Euler angle around
     specified axes.
 
@@ -157,7 +158,7 @@ def rotate3d_Euler(x, y, z, angles, axes='zyz', center=[0., 0., 0.]):
     return xrot, yrot, zrot
 
 
-def rotate_usphere(phi, the, angles):
+def rotate_usphere(phi: Union[float, np.ndarray], the: Union[float, np.ndarray], angles: List[float]) -> Tuple[float, float]:
     """Rotates spherical coordinates by Euler angles performed along the z-axis,
     then y-axis and then z-axis.
 
@@ -178,7 +179,7 @@ def rotate_usphere(phi, the, angles):
     return phi, the
 
 
-def midpoint_usphere(phi1, phi2, the1, the2):
+def midpoint_usphere(phi1: float, phi2: float, the1: float, the2: float) -> Tuple[float, float]:
     """Finds the spherical angular coordinates of the midpoint between two points
     on a unit sphere.
 
@@ -203,7 +204,7 @@ def midpoint_usphere(phi1, phi2, the1, the2):
     return midphi, midthe
 
 
-def rotate2plane(c1, c2):
+def rotate2plane(c1: float, c2: float) -> Tuple[List[float], List[float], List[float]]:
     """Finds the rotation angles to place the two coordinates c1 and c2 along a
     latitude = pi/2 (i.e. equator of sphere) and with a midpoint of longitude = pi.
 
@@ -236,7 +237,7 @@ def rotate2plane(c1, c2):
     return a1, a2, a3
 
 
-def forward_rotate(phi, the, a1, a2, a3):
+def forward_rotate(phi: Union[float, np.ndarray], the: Union[float, np.ndarray], a1: List[float], a2: List[float], a3: List[float]) -> Tuple[Union[float, np.ndarray], Union[float, np.ndarray]]:
     """Applies a forward rotation of spherical angular coordinates phi and theta
     using the forward Euler angles of rotation a1, a2 and a3.
 
@@ -254,7 +255,7 @@ def forward_rotate(phi, the, a1, a2, a3):
     return _phi, _the
 
 
-def backward_rotate(phi, the, a1, a2, a3):
+def backward_rotate(phi: Union[float, np.ndarray], the: Union[float, np.ndarray], a1: List[float], a2: List[float], a3: List[float]) -> Tuple[Union[float, np.ndarray], Union[float, np.ndarray]]:
     """Applies a backward rotation of spherical angular coordinates phi and theta
     using the forward Euler angles of rotation a1, a2 and a3.
 

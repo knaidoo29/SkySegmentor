@@ -1,10 +1,11 @@
 import numpy as np
 import healpy as hp
+from typing import List, Tuple, Optional
 
 from . import coords, rotate
 
 
-def get_partition_IDs(partition):
+def get_partition_IDs(partition: np.ndarray) -> np.ndarray:
     """Returns the total weights of each partition.
 
     Parameters
@@ -21,7 +22,7 @@ def get_partition_IDs(partition):
     return partition_IDs
 
 
-def total_partition_weights(partition, weights):
+def total_partition_weights(partition: np.ndarray, weights: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
     """Returns the total weights of each partition.
 
     Parameters
@@ -45,7 +46,7 @@ def total_partition_weights(partition, weights):
     return partition_IDs, partition_weights
 
 
-def remove_val4array(array, val):
+def remove_val4array(array: np.ndarray, val: float) -> np.ndarray:
     """Removes a given value from an array.
 
     Parameters
@@ -58,7 +59,7 @@ def remove_val4array(array, val):
     return array[array != val]
 
 
-def fill_map(pixID, nside, val=1.):
+def fill_map(pixID: np.ndarray, nside: int, val: float=1.) -> np.ndarray:
     """Fill a Healpix map with a given value val at given pixel locations.
 
     Parameters
@@ -75,7 +76,7 @@ def fill_map(pixID, nside, val=1.):
     return tmap
 
 
-def find_map_barycenter(bnmap, wmap=None):
+def find_map_barycenter(bnmap: np.ndarray, wmap: Optional[np.ndarray]=None) -> Tuple[float, float]:
     """Determines the barycenter of center of mass direction of the input binary map.
 
     Parameters
@@ -106,7 +107,7 @@ def find_map_barycenter(bnmap, wmap=None):
     return phic, thec, themax
 
 
-def find_points_barycenter(phi, the, weights=None):
+def find_points_barycenter(phi: np.ndarray, the: np.ndarray, weights: Optional[np.ndarray]=None) -> Tuple[float, float]:
     """Determines the barycenter of center of mass direction of the input point dataset.
 
     Parameters
@@ -133,7 +134,7 @@ def find_points_barycenter(phi, the, weights=None):
     return phic, thec, themax
 
 
-def get_map_border(bnmap, wmap=None, res=[200, 100]):
+def get_map_border(bnmap: np.ndarray, wmap: Optional[np.ndarray]=None, res: List[float]=[200, 100]) -> Tuple[np.ndarray, np.ndarray]:
     """Determines the outer border of binary map region.
 
     Parameters
@@ -148,7 +149,7 @@ def get_map_border(bnmap, wmap=None, res=[200, 100]):
 
     Returns
     -------
-    phi_border, the_border : float
+    phi_border, the_border : array
         Approximate border region.
     """
     nside = hp.npix2nside(len(bnmap))
@@ -189,7 +190,7 @@ def get_map_border(bnmap, wmap=None, res=[200, 100]):
     return phi_border, the_border
 
 
-def get_points_border(phi, the, weights=None, res=100):
+def get_points_border(phi: np.ndarray, the: np.ndarray, weights: Optional[np.ndarray]=None, res: int=100) -> Tuple[np.ndarray, np.ndarray]:
     """Determines the outer border of binary map region.
 
     Parameters
@@ -203,7 +204,7 @@ def get_points_border(phi, the, weights=None, res=100):
 
     Returns
     -------
-    phi_border, the_border : float
+    phi_border, the_border : array
         Approximate border region.
     """
     phic, thec, themax = find_points_barycenter(phi, the, weights=weights)
@@ -227,13 +228,11 @@ def get_points_border(phi, the, weights=None, res=100):
     return phi_border, the_border
 
 
-def get_map_most_dist_points(nside, bnmap, wmap=None, res=[100, 50]):
+def get_map_most_dist_points(bnmap: np.ndarray, wmap: Optional[np.ndarray]=None, res: List[float]=[100, 50]) -> Tuple[float, float, float, float]:
     """Returns the most distant points on a binary map.
 
     Parameters
     ----------
-    nside : int
-        HEalpix map nside.
     bnmap : int array
         Binary healpix map.
     wmap : array, optional
@@ -264,7 +263,7 @@ def get_map_most_dist_points(nside, bnmap, wmap=None, res=[100, 50]):
     return p1, t1, p2, t2
 
 
-def get_points_most_dist_points(phi, the, weights=None, res=100):
+def get_points_most_dist_points(phi: np.ndarray, the: np.ndarray, weights: Optional[np.ndarray]=None, res: int=100) -> Tuple[float, float, float, float]:
     """Returns the most distant points from a set of points.
 
     Parameters
@@ -298,7 +297,7 @@ def get_points_most_dist_points(phi, the, weights=None, res=100):
     return p1, t1, p2, t2
 
 
-def weight_dif(phi_split, phi, weights, balance=1):
+def weight_dif(phi_split: float, phi: np.ndarray, weights: np.ndarray, balance: int=1) -> float:
     """Compute the difference between the weights on either side of phi_split.
 
     Parameters
@@ -319,7 +318,7 @@ def weight_dif(phi_split, phi, weights, balance=1):
     return abs(weights1-weights2)
 
 
-def find_dphi(phi, weights, balance=1):
+def find_dphi(phi: np.ndarray, weights: np.ndarray, balance: int=1) -> float:
     """Determines the splitting longitude required for partitioning, either with
     1-to-1 weights on either side or unbalanced weighting if balance != 1.
 
@@ -350,7 +349,7 @@ def find_dphi(phi, weights, balance=1):
     return dphi
 
 
-def segmentmap2(weightmap, balance=1, partitionmap=None, partition=None, res=[100, 50]):
+def segmentmap2(weightmap: np.ndarray, balance: int=1, partitionmap: Optional[np.ndarray]=None, partition: Optional[int]=None, res: List[int]=[100, 50]) -> np.ndarray:
     """Segment a map with weights into 2 equal (unequal in balance != 1).
 
     Parameters
@@ -394,7 +393,7 @@ def segmentmap2(weightmap, balance=1, partitionmap=None, partition=None, res=[10
 
     if np.sum(_bnmap) != len(_bnmap):
 
-        p1, t1, p2, t2 = get_map_most_dist_points(nside, _bnmap, wmap=weightmap, res=res)
+        p1, t1, p2, t2 = get_map_most_dist_points(_bnmap, wmap=weightmap, res=res)
 
         a1, a2, a3 = rotate.rotate2plane([p1, t1], [p2, t2])
 
@@ -408,8 +407,8 @@ def segmentmap2(weightmap, balance=1, partitionmap=None, partition=None, res=[10
     return partitionmap
 
 
-def segmentpoints2(phi, the, weights=None, balance=1, partitionID=None,
-    partition=None, res=100):
+def segmentpoints2(phi: np.ndarray, the: np.ndarray, weights: Optional[np.ndarray]=None, balance: int=1, partitionID: Optional[np.ndarray]=None,
+    partition: Optional[int]=None, res: int=100) -> np.ndarray:
     """Segments a set of points with weights into 2 equal (unequal in balance != 1).
 
     Parameters
@@ -463,7 +462,7 @@ def segmentpoints2(phi, the, weights=None, balance=1, partitionID=None,
     return partitionID
 
 
-def segmentmapN(weightmap, Npartitions, res=[100, 50]):
+def segmentmapN(weightmap: np.ndarray, Npartitions: int, res: List[int]=[100, 50]) -> np.ndarray:
     """Segment a map with weights into equal Npartition sides.
 
     Parameters
@@ -512,7 +511,7 @@ def segmentmapN(weightmap, Npartitions, res=[100, 50]):
     return partitionmap
 
 
-def segmentpointsN(phi, the, Npartitions, weights=None, res=100):
+def segmentpointsN(phi: np.ndarray, the: np.ndarray, Npartitions: int, weights: Optional[np.ndarray]=None, res: int=100) -> np.ndarray:
     """Segments a set of points with weights into equal Npartition sides.
 
     Parameters

@@ -1,8 +1,9 @@
 import numpy as np
 import healpy as hp
+from typing import List, Tuple, Union
 
 
-def _cascade(labels, indexin):
+def _cascade(labels: np.ndarray, indexin: int) -> int:
     """Cascades down a linked list of label reassignments.
 
     Parameters
@@ -23,7 +24,7 @@ def _cascade(labels, indexin):
     return indexout
 
 
-def _cascade_all(labels):
+def _cascade_all(labels: np.ndarray) -> np.ndarray:
     """Cascade label index for an array.
 
     Parameters
@@ -42,7 +43,7 @@ def _cascade_all(labels):
     return labelsout
 
 
-def _unionise(ind1, ind2, labels):
+def _unionise(ind1: int, ind2: int, labels: np.ndarray) -> Tuple[int, int, int]:
     """Finds the union of two label indexes.
 
     Parameters
@@ -68,7 +69,7 @@ def _unionise(ind1, ind2, labels):
     return ind1out, ind2out, indout
 
 
-def _shuffle_down(labels):
+def _shuffle_down(labels: np.ndarray) -> np.ndarray:
     """Shuffle label index for an array.
 
     Parameters
@@ -98,14 +99,14 @@ def _shuffle_down(labels):
     return labelsout
 
 
-def _if_list_concatenate(arr):
+def _if_list_concatenate(arr: List[Union[float, int]]) -> np.ndarray:
     """Concatenates list only if length is > 1."""
     if len(arr) > 1:
         arr = np.concatenate(arr)
     return arr
 
 
-def unionfinder(binmap):
+def unionfinder(binmap: np.ndarray) -> np.ndarray:
     """Group or label assignment on a healpix grid using the HoshenKopelman algorithm.
 
     Parameters
