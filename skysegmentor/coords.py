@@ -4,7 +4,9 @@ from typing import List, Tuple, Union
 from . import maths, utils
 
 
-def cart2sphere(x:np.ndarray, y:np.ndarray, z:np.ndarray, center:List[float]=[0., 0., 0.]) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
+def cart2sphere(
+    x: np.ndarray, y: np.ndarray, z: np.ndarray, center: List[float] = [0.0, 0.0, 0.0]
+) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Return polar coordinates for a given set of cartesian coordinates.
 
     Parameters
@@ -27,25 +29,32 @@ def cart2sphere(x:np.ndarray, y:np.ndarray, z:np.ndarray, center:List[float]=[0.
     theta : array
         Theta coordinates [0, pi].
     """
-    r = np.sqrt((x-center[0])**2. + (y-center[1])**2. + (z-center[2])**2.)
-    phi = np.arctan2(y-center[1], x-center[0])
+    r = np.sqrt(
+        (x - center[0]) ** 2.0 + (y - center[1]) ** 2.0 + (z - center[2]) ** 2.0
+    )
+    phi = np.arctan2(y - center[1], x - center[0])
     if utils.isscalar(phi) is True:
-        if phi < 0.:
-            phi += 2.*np.pi
-        if r != 0.:
-            theta = np.arccos((z-center[2])/r)
+        if phi < 0.0:
+            phi += 2.0 * np.pi
+        if r != 0.0:
+            theta = np.arccos((z - center[2]) / r)
         else:
-            theta = 0.
+            theta = 0.0
     else:
-        condition = np.where(phi < 0.)
-        phi[condition] += 2.*np.pi
+        condition = np.where(phi < 0.0)
+        phi[condition] += 2.0 * np.pi
         theta = np.zeros(len(phi))
-        condition = np.where(r != 0.)[0]
-        theta[condition] = np.arccos((z[condition]-center[2])/r[condition])
+        condition = np.where(r != 0.0)[0]
+        theta[condition] = np.arccos((z[condition] - center[2]) / r[condition])
     return r, phi, theta
 
 
-def sphere2cart(r: np.ndarray, phi: np.ndarray, theta: np.ndarray, center: List[float]=[0., 0., 0.]) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
+def sphere2cart(
+    r: np.ndarray,
+    phi: np.ndarray,
+    theta: np.ndarray,
+    center: List[float] = [0.0, 0.0, 0.0],
+) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Converts spherical polar coordinates into cartesian coordinates.
 
     Parameters
@@ -75,7 +84,12 @@ def sphere2cart(r: np.ndarray, phi: np.ndarray, theta: np.ndarray, center: List[
     return x, y, z
 
 
-def distusphere(phi1: Union[float, np.ndarray], theta1: Union[float, np.ndarray], phi2: Union[float, np.ndarray], theta2: Union[float, np.ndarray]) -> Union[float, np.ndarray]:
+def distusphere(
+    phi1: Union[float, np.ndarray],
+    theta1: Union[float, np.ndarray],
+    phi2: Union[float, np.ndarray],
+    theta2: Union[float, np.ndarray],
+) -> Union[float, np.ndarray]:
     """Compute angular (great-arc) distance between two points on a unit
     sphere.
 
@@ -92,7 +106,7 @@ def distusphere(phi1: Union[float, np.ndarray], theta1: Union[float, np.ndarray]
         Angular great-arc distance.
     """
     if utils.isscalar(phi1) is True:
-        r = 1.
+        r = 1.0
     else:
         r = np.ones(len(phi1))
     x1, y1, z1 = sphere2cart(r, phi1, theta1)
