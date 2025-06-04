@@ -125,7 +125,7 @@ partitionIDs = skysegmentor.segmentpointsN(phi, the, Npartitions, weights=weight
 
 ### Tutorials and API
 
-Tutorials and API can be found here [here](https://skysegmentor.readthedocs.io/)
+Tutorials and API can be found here [here](https://skysegmentor.readthedocs.io/).
 
 ## Citing
 
