@@ -7,28 +7,35 @@
     <a href="https://codecov.io/github/knaidoo29/SkySegmentor" > 
     <img src="https://codecov.io/github/knaidoo29/SkySegmentor/graph/badge.svg?token=C9MXIA22X2"/> 
     </a>
+    <a href="https://img.shields.io/badge/Python-3.9%20|%203.10%20|%203.11%20|%203.12-blue">
+    <img src="https://img.shields.io/badge/Python-3.9%20|%203.10%20|%203.11%20|%203.12-blue" alt="Python Version Support">
+    </a>
+    <a href="https://img.shields.io/github/v/release/knaidoo29/skysegmentor">
+    <img src="https://img.shields.io/github/v/release/knaidoo29/skysegmentor" alt="Version">
+    </a>
     <a href="https://pypi.org/project/skysegmentor/">
     <img src="https://img.shields.io/pypi/v/skysegmentor.svg" alt="PyPI version">
     </a>
     <a href="https://skysegmentor.readthedocs.io/en/latest/">
     <img src="https://readthedocs.org/projects/skysegmentor/badge/?version=latest" alt="Documentation Status">
     </a>
-    <a href="https://opensource.org/licenses/MIT">
-    <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT">
-    </a>
     <a href="https://github.com/knaidoo29/SkySegmentor">
     <img src="https://img.shields.io/badge/GitHub-repo-blue?logo=github" alt="GitHub repository">
+    </a>
+    <a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT">
     </a>
     <a href="https://github.com/psf/black">
     <img src="https://img.shields.io/badge/code%20style-black-000000.svg" alt="Code style: black">
     </a>
 </p>
 
-<!-- [![PyPI version](https://img.shields.io/pypi/v/skysegmentor.svg)](https://pypi.org/project/skysegmentor/)
-[![GitHub](https://img.shields.io/badge/GitHub-repo-blue?logo=github)](https://github.com/knaidoo29/SkySegmentor)
-[![Docs](https://readthedocs.org/projects/skysegmentor/badge/?version=latest)](https://skysegmentor.readthedocs.io/en/latest/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black) -->
+<!-- <a href="https://img.shields.io/github/stars/knaidoo29/skysegmentor">
+<img src="https://img.shields.io/github/stars/knaidoo29/skysegmentor" alt="github: stars">
+</a>
+<a href="https://img.shields.io/github/stars/knaidoo29/skysegmentor">
+<img src="https://img.shields.io/github/forks/knaidoo29/skysegmentor" alt="github: forks">
+</a> -->
 
 ## Introduction
 
@@ -46,7 +53,15 @@ partitions are approximately equal in area, with discrepancies no larger than th
 
 ## Installation
 
-First clone the repository
+### Pip installation:
+
+```
+pip install skysegmentor
+```
+
+### From the source:
+
+Clone the repository
 
 ```
 git clone https://github.com/knaidoo29/SkySegmentor.git
@@ -57,12 +72,6 @@ and install by running
 
 ```
 pip install . [--user]
-```
-
-You should now be able to import the module:
-
-```python
-import skysegmentor
 ```
 
 ## Documentation
