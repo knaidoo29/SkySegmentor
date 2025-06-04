@@ -10,21 +10,27 @@
 .. raw:: html
 
    <p align="center">
-     <a href="https://pypi.org/project/skysegmentor/">
-       <img src="https://img.shields.io/pypi/v/skysegmentor.svg" alt="PyPI version">
-     </a>
-     <a href="https://github.com/knaidoo29/SkySegmentor">
-       <img src="https://img.shields.io/badge/GitHub-repo-blue?logo=github" alt="GitHub repository">
-     </a>
-     <a href="https://skysegmentor.readthedocs.io/en/latest/">
-       <img src="https://readthedocs.org/projects/skysegmentor/badge/?version=latest" alt="Documentation Status">
-     </a>
-     <a href="https://opensource.org/licenses/MIT">
-       <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT">
-     </a>
-     <a href="https://github.com/psf/black">
-       <img src="https://img.shields.io/badge/code%20style-black-000000.svg" alt="Code style: black">
-     </a>
+      <a href="https://github.com/knaidoo29/SkySegmentor/actions/workflows/python-tests.yml">
+      <img src="https://github.com/knaidoo29/SkySegmentor/actions/workflows/python-tests.yml/badge.svg" alt="Python Tests">
+      </a>
+      <a href="https://codecov.io/github/knaidoo29/SkySegmentor" > 
+      <img src="https://codecov.io/github/knaidoo29/SkySegmentor/graph/badge.svg?token=C9MXIA22X2"/> 
+      </a>
+      <a href="https://pypi.org/project/skysegmentor/">
+      <img src="https://img.shields.io/pypi/v/skysegmentor.svg" alt="PyPI version">
+      </a>
+      <a href="https://skysegmentor.readthedocs.io/en/latest/">
+      <img src="https://readthedocs.org/projects/skysegmentor/badge/?version=latest" alt="Documentation Status">
+      </a>
+      <a href="https://opensource.org/licenses/MIT">
+      <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT">
+      </a>
+      <a href="https://github.com/knaidoo29/SkySegmentor">
+      <img src="https://img.shields.io/badge/GitHub-repo-blue?logo=github" alt="GitHub repository">
+      </a>
+      <a href="https://github.com/psf/black">
+      <img src="https://img.shields.io/badge/code%20style-black-000000.svg" alt="Code style: black">
+      </a>
    </p>
 
 .. 
