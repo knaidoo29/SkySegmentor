@@ -34,7 +34,8 @@ Segmenting Points on the Sphere
     Npartitions = 100 # Number of partitions
     partitionIDs = skysegmentor.segmentpointsN(phi, the, Npartitions)
 
-if using RA and Dec in degrees you can convert to logitudinal and latitude coordinates `phi` and `the` using
+if using RA and Dec in degrees you can convert to logitudinal and latitude coordinates 
+``phi`` and ``the`` using
 
 .. code-block:: python
 
