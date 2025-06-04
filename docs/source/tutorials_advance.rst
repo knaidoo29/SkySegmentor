@@ -59,13 +59,13 @@ a stage V survey like footprint.
 .. image:: _static/stageVsurvey.png
    :align: center
 
-We can now use `SkySegmentor`'s inbuilt `unionfinder` function to find contiguous regions in the
+We can now use ``SkySegmentor``'s inbuilt ``unionfinder`` function to find contiguous regions in the
 footprint. This uses an adapted version of the grid-based Hoshen-Kopelman union finding algorithm
 altered to work on the HEALPix grid. 
 
 .. note::
 
-    `groupmap = 0` is used to represent masked out region.
+    ``groupmap = 0`` is used to represent masked out region.
 
 .. code-block:: python
 
@@ -74,7 +74,7 @@ altered to work on the HEALPix grid.
 .. image:: _static/groups.png
     :align: center
 
-Let's focus on region 1, by constructing a mask for region 1 only:
+Let's focus on region 3, by constructing a mask for region 3 only:
 
 .. code-block:: python
 
@@ -90,7 +90,7 @@ We will now partition this mask in the following section.
 Partitioning a HEALPix map
 --------------------------
 
-We can partitioning a HEALPix mask into `Npartitions` by running:
+We can partitioning a HEALPix mask into ``Npartitions`` by running:
 
 .. code-block:: python
 
@@ -107,14 +107,14 @@ We can partitioning a HEALPix mask into `Npartitions` by running:
 
 .. note::
 
-    `partitionmap = 0` is used to represent masked out region.
+    ``partitionmap = 0`` is used to represent masked out region.
 
 .. image:: _static/partitionmap1.png
     :align: center
 
 .. note::
 
-    This is assuming `Npartitions` is smaller than the number of pixels in the mask and thus 
+    This is assuming ``Npartitions`` is smaller than the number of pixels in the mask and thus 
     not limited by the pixel scale of the map.
 
 Partitioning a HEALPix map by weight
@@ -154,8 +154,8 @@ Partitioning a set of points
 ----------------------------
 
 Points on the sphere in skysegmentor are alway defined in phi (longitude) and theta (latitude), both
-defined in radians where phi lies in the range [0, 2 pi] and theta [0, pi] where `theta=0`` is the north 
-pole. To convert astronomical RA and Dec to phi and theta simply do:
+defined in radians where phi lies in the range :math:`[0, 2\pi]` and theta :math:`[0, pi]` where ``theta=0`` 
+is the north pole. To convert astronomical RA and Dec to phi and theta simply do:
 
 .. code-block:: python
 
