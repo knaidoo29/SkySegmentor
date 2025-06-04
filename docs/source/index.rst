@@ -53,7 +53,7 @@ Contents
 Introduction
 ============
 
-**SkySegmentor** is a ``python 3`` package for dividing points or maps (in ``HEALPix``
+**SkySegmentor** is a ``python`` package for dividing points or maps (in ``HEALPix``
 format) on the celestial sphere into equal-sized segments. It employs a sequential 
 binary space partitioning scheme -- a generalization of the *k*-d tree algorithm -- 
 that supports segmentation of arbitrarily shaped sky regions. By design, all 

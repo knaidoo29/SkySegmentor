@@ -76,7 +76,7 @@ pip install . [--user]
 
 ## Documentation
 
-Documentation, including tutorials and explanation of API, can be found here [here](https://skysegmentor.readthedocs.io/). Alternatively a PDF version of the documentation is located in the ``docs/`` folder called ``skysegmentor.pdf``. Offline documentation can be generating by running ``make html`` in the ``docs/`` folder which will generate html documentation in the ``docs/build/html`` folder that can be accessed by opening the ``index.html`` file in a browser.
+Documentation, including tutorials and explanation of API, can be found here [here](https://skysegmentor.readthedocs.io/).
 
 ## Tutorial
 
@@ -123,9 +123,9 @@ weights = # define point weights
 partitionIDs = skysegmentor.segmentpointsN(phi, the, Npartitions, weights=weights)
 ```
 
-### Documentation, Tutorials and API
+### Tutorials and API
 
-Documentation, tutorials and API can be found here [here](https://skysegmentor.readthedocs.io/)
+Tutorials and API can be found here [here](https://skysegmentor.readthedocs.io/)
 
 ## Citing
 
