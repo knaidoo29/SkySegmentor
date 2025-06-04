@@ -7,6 +7,9 @@
     <a href="https://github.com/knaidoo29/SkySegmentor">
     <img src="https://img.shields.io/badge/GitHub-repo-blue?logo=github" alt="GitHub repository">
     </a>
+    <a href="https://codecov.io/github/knaidoo29/SkySegmentor" > 
+    <img src="https://codecov.io/github/knaidoo29/SkySegmentor/graph/badge.svg?token=C9MXIA22X2"/> 
+    </a>
     <a href="https://skysegmentor.readthedocs.io/en/latest/">
     <img src="https://readthedocs.org/projects/skysegmentor/badge/?version=latest" alt="Documentation Status">
     </a>
