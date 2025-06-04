@@ -8,7 +8,7 @@
    :class: only-dark
 
 .. raw:: html
-
+   
    <p align="center">
       <a href="https://github.com/knaidoo29/SkySegmentor/actions/workflows/python-tests.yml">
       <img src="https://github.com/knaidoo29/SkySegmentor/actions/workflows/python-tests.yml/badge.svg" alt="Python Tests">
@@ -16,42 +16,28 @@
       <a href="https://codecov.io/github/knaidoo29/SkySegmentor" > 
       <img src="https://codecov.io/github/knaidoo29/SkySegmentor/graph/badge.svg?token=C9MXIA22X2"/> 
       </a>
+      <a href="https://img.shields.io/badge/Python-3.9%20|%203.10%20|%203.11%20|%203.12-blue">
+      <img src="https://img.shields.io/badge/Python-3.9%20|%203.10%20|%203.11%20|%203.12-blue" alt="Python Version Support">
+      </a>
+      <a href="https://img.shields.io/github/v/release/knaidoo29/skysegmentor">
+      <img src="https://img.shields.io/github/v/release/knaidoo29/skysegmentor" alt="Version">
+      </a>
       <a href="https://pypi.org/project/skysegmentor/">
       <img src="https://img.shields.io/pypi/v/skysegmentor.svg" alt="PyPI version">
       </a>
       <a href="https://skysegmentor.readthedocs.io/en/latest/">
       <img src="https://readthedocs.org/projects/skysegmentor/badge/?version=latest" alt="Documentation Status">
       </a>
-      <a href="https://opensource.org/licenses/MIT">
-      <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT">
-      </a>
       <a href="https://github.com/knaidoo29/SkySegmentor">
       <img src="https://img.shields.io/badge/GitHub-repo-blue?logo=github" alt="GitHub repository">
+      </a>
+      <a href="https://opensource.org/licenses/MIT">
+      <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT">
       </a>
       <a href="https://github.com/psf/black">
       <img src="https://img.shields.io/badge/code%20style-black-000000.svg" alt="Code style: black">
       </a>
    </p>
-
-.. 
-   .. image:: https://img.shields.io/pypi/v/skysegmentor.svg
-      :target: https://pypi.org/project/skysegmentor/
-      :alt: PyPI version
-
-   .. image:: https://img.shields.io/badge/GitHub-repo-blue?logo=github
-      :target: https://github.com/knaidoo29/SkySegmentor
-      :alt: GitHub repository
-
-   .. image:: https://readthedocs.org/projects/skysegmentor/badge/?version=latest
-      :target: https://skysegmentor.readthedocs.io/en/latest/
-      :alt: Documentation Status
-
-   .. image:: https://img.shields.io/badge/License-MIT-yellow.svg
-      :target: https://opensource.org/licenses/MIT
-      :alt: License: MIT
-
-   .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
-      :target: https://github.com/psf/black
 
 Contents
 ========
@@ -83,7 +69,17 @@ Dependencies
 Installation
 ============
 
-First cloning the repository
+Pip Installation
+----------------
+
+.. code-block:: bash
+
+   pip install skysegmentor
+
+From the source
+---------------
+
+Clone the repository
 
 .. code-block:: bash
 
@@ -96,12 +92,6 @@ and install by running
 
     pip install . [--user]
 
-
-You should now be able to import the module:
-
-.. code-block:: python
-
-    import skysegmentor
 
 Tutorials
 =========
