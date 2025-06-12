@@ -113,7 +113,7 @@ API
 Citing
 ======
 
-If you use ``SkySegmentor`` in a publication please cite:
+If you use ``SkySegmentor`` in a publication please cite our paper:
 
 * ArXiv: `https://arxiv.org/abs/2506.09118 <https://arxiv.org/abs/2506.09118>`_
 
