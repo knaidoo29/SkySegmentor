@@ -129,21 +129,9 @@ Tutorials and API can be found here [here](https://skysegmentor.readthedocs.io/)
 
 ## Citing
 
-``SkySegmentor`` was developed as part of the Euclid angular power spectra internal covariance pipeline. If you use ``SkySegmentor`` please cite this paper, which can be found here:
+``SkySegmentor`` was developed as part of the Euclid angular power spectra internal covariance pipeline. If you use ``SkySegmentor`` please cite our paper:
 
-**--THESE ARE PLACEHOLDERS TO BE UPDATED LATER--**
-* NASA ADS:
-* ArXiv: 
-* BibTex:
-    ```
-    @ARTICLE{Naidoo2025,
-            author = {{Euclid Collaboration} and {Naidoo}, K. and 
-            {Ruiz-Zapatero}, J. and {Tessore}, N. and 
-            {Joachimi}, B. and {Loureiro}, A. and
-            others ...}
-            title = "{Euclid preparation: TBD. Accurate and precise data-driven angular power spectrum covariances}
-    }
-    ```
+* ArXiv: https://arxiv.org/abs/2506.09118
 
 and include a link to the SkySegmentor documentation page:
 

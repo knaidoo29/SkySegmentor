@@ -113,22 +113,9 @@ API
 Citing
 ======
 
-.. warning::
-
-  These are placeholders to be replaced upon publication on ArXiv.
-
 If you use ``SkySegmentor`` in a publication please cite:
 
-* NASA ADS:
-* ArXiv:
-
-BibTex::
-
-    @ARTICLE{Naidoo2025,
-        author = {{Euclid Collaboration} and {Naidoo}, K. and {Ruiz-Zapatero}, J. 
-        and {Tessore}, N. and {Joachimi}, B. and {Loureiro}, A. and others ...},
-        title = "{Euclid preparation: TBD. Accurate and precise data-driven angular power spectrum covariances}"
-     }
+* ArXiv: `https://arxiv.org/abs/2506.09118 <https://arxiv.org/abs/2506.09118>`_
 
 and include a link to the SkySegmentor documentation page: https://skysegmentor.readthedocs.io/
 
