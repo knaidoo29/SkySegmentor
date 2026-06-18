@@ -1,12 +1,12 @@
 [build-system]
-requires = ["setuptools>61.0.0", "wheel", "numpy>=1.22,<1.27"]
+requires = ["setuptools>61.0.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "skysegmentor"
 description = "SkySegmentor: Splits a binary map into several regions using the binary space partition algorithm."
 readme = "README.md"
-requires-python = ">=3.7"
+requires-python = ">=3.9"
 license = {text = "MIT"}
 authors = [{name = "Krishna Naidoo", email = "krishna.naidoo.11@ucl.ac.uk"}]
 maintainers = [{name = "Krishna Naidoo", email = "krishna.naidoo.11@ucl.ac.uk"}]
@@ -16,8 +16,6 @@ classifiers = [
     "Intended Audience :: Developers",
     "Intended Audience :: Science/Research",
     "Natural Language :: English",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
@@ -28,7 +26,7 @@ classifiers = [
     "Topic :: Scientific/Engineering",
 ]
 dependencies = [
-    "numpy>=1.22,<1.27",
+    "numpy>=1.22",
     "healpy>=1.15.0"
 ]
 dynamic = ["version"]
